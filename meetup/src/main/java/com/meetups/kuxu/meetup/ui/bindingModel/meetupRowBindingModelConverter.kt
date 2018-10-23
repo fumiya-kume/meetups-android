@@ -4,7 +4,7 @@ import com.meetups.kuxu.meetup.entity.NearMeetupEntity
 
 internal object meetupRowBindingModelConverter {
   fun convert(entity: NearMeetupEntity) =
-    meetupRowBindingModel(
+    MeetupRowBindingModel(
       entity.id,
       entity.title,
       entity.meetupLink
