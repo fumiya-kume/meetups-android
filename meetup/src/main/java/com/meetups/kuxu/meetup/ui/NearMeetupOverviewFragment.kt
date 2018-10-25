@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.meetups.kuxu.meetup.R
 import com.meetups.kuxu.meetup.databinding.FragmentNearMeetupOverviewBinding
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -30,6 +31,12 @@ class NearMeetupOverviewFragment : Fragment() {
     )
 
     val viewModel: NearMeetupViewModel by viewModel()
+
+    binding.toolbar.inflateMenu(R.menu.event_overview_menu)
+    binding.toolbar.setOnMenuItemClickListener {
+      true
+    }
+
 
     val adapter = MeetupRowAdapter(requireContext())
 
