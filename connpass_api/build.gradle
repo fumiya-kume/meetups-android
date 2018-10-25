@@ -4,9 +4,7 @@ apply plugin: 'kotlin-android-extensions'
 
 android {
     compileSdkVersion 28
-
-
-
+    
     defaultConfig {
         minSdkVersion 21
         targetSdkVersion 28
@@ -55,7 +53,4 @@ dependencies {
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$kotlin_coroutine_version"
     // Kotlin Extension
     implementation 'androidx.core:core-ktx:1.0.0'
-}
-repositories {
-    mavenCentral()
 }
