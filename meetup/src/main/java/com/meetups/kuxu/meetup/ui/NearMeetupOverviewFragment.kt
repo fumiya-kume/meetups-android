@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.meetups.kuxu.meetup.R
 import com.meetups.kuxu.meetup.databinding.FragmentNearMeetupOverviewBinding
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -32,8 +33,18 @@ class NearMeetupOverviewFragment : Fragment() {
 
     val viewModel: NearMeetupViewModel by viewModel()
 
+    fun setVisibleSearchNearMeetupBottomSheet(visivle: Boolean) {
+      val searchNearMeetupBottonSheetBehavior = BottomSheetBehavior.from(binding.searchNearMeetupBottomSheet)
+      val state = if (visivle) BottomSheetBehavior.STATE_COLLAPSED else BottomSheetBehavior.STATE_HIDDEN
+      searchNearMeetupBottonSheetBehavior.state =
+          if (visivle) BottomSheetBehavior.STATE_COLLAPSED else BottomSheetBehavior.STATE_HIDDEN
+    }
+
+    setVisibleSearchNearMeetupBottomSheet(false)
+
     binding.toolbar.inflateMenu(R.menu.event_overview_menu)
     binding.toolbar.setOnMenuItemClickListener {
+      setVisibleSearchNearMeetupBottomSheet(true)
       true
     }
 

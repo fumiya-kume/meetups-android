@@ -7,7 +7,7 @@ import kotlinx.coroutines.experimental.runBlocking
 internal class MeetupListDataStoreImpl : MeetupListDataStore {
   override fun loadMeetupList(): MeetupJson =
     runBlocking {
-      "https://connpass.com/api/v1/event/".httpGet().awaitResultObject<MeetupJson>().await()
+      "https://connpass.com/api/v1/event/?count=30".httpGet().awaitResultObject<MeetupJson>().await()
         .fold(
           success = {
             return@fold it
