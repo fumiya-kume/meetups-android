@@ -9,9 +9,7 @@ internal class MyApplication : Application() {
     super.onCreate()
     startKoin(
       this,
-      listOf(
-        meetupModule
-      )
+      meetupModule
     )
   }
 }

@@ -27,6 +27,9 @@ android {
         exclude 'META-INF/main.kotlin_module'
         exclude 'META-INF/LICENSE-notice.md'
     }
+    dataBinding {
+        enabled true
+    }
 }
 
 dependencies {

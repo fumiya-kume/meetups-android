@@ -1,7 +1,7 @@
 package com.meetups.kuxu.meetup.ui.bindingModel
 
 internal data class MeetupRowBindingModel(
-  val id: String,
+  val id: Int,
   val meetupTitle: String,
   val meetupUrl: String
 )
