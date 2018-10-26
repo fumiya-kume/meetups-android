@@ -66,7 +66,25 @@ class NearMeetupOverviewFragment : Fragment() {
           }
         )
       } else {
-        ActivityCompat.requestPermissions(activity as Activity, arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), 0)
+        if (ActivityCompat.shouldShowRequestPermissionRationale(
+            activity as Activity,
+            Manifest.permission.ACCESS_FINE_LOCATION
+          )
+        ) {
+          ActivityCompat.requestPermissions(
+            activity as Activity,
+            arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
+            0
+          )
+        } else {
+          Snackbar.make(
+            binding.searchNearMeetupBottomSheet,
+            "設定から権限を有効にしないと現在地からの検索が使えません...><",
+            Snackbar.LENGTH_SHORT
+          )
+            .show()
+        }
+
       }
 
       true
