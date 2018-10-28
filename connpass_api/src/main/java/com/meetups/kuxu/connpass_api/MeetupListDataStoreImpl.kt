@@ -21,4 +21,18 @@ internal class MeetupListDataStoreImpl : MeetupListDataStore {
         )
     }
   }
+
+  override fun searchMeetupList(keyword: String): ReceiveChannel<MeetupJson> = GlobalScope.produce {
+    runBlocking {
+      "https://connpass.com/api/v1/event/?count=30&keyword=${keyword}".httpGet().awaitResultObject<MeetupJson>().await()
+        .fold(
+          success = {
+            send(it)
+          },
+          failure = {
+            throw it
+          }
+        )
+    }
+  }
 }

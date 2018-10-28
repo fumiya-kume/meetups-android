@@ -31,16 +31,58 @@
 				app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
 
 		<com.google.android.material.card.MaterialCardView
+				android:id="@+id/search_keyword_meetup_bottom_sheet"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:padding="8dp"
+				android:layout_margin="8dp"
+				app:behavior_peekHeight="150dp"
+				app:layout_behavior="@string/bottom_sheet_behavior"
+				app:cardCornerRadius="18dp"
+				app:behavior_hideable="true"
+				android:elevation="8dp" android:background="@android:color/darker_gray">
+
+			<androidx.constraintlayout.widget.ConstraintLayout
+					android:layout_width="match_parent"
+					android:layout_height="match_parent">
+				<com.google.android.material.textfield.TextInputEditText
+						android:hint="検索したいキーワードを入力してください"
+						android:id="@+id/keyword_search_edit_text"
+						android:layout_width="0dp"
+						android:layout_height="wrap_content" app:layout_constraintEnd_toEndOf="parent"
+						android:layout_marginEnd="8dp" app:layout_constraintStart_toStartOf="parent"
+						android:layout_marginStart="8dp"
+						android:layout_marginTop="8dp"
+						android:textSize="16sp"
+						style="@android:style/Widget.DeviceDefault.Light.TextView"/>
+
+				<com.google.android.material.button.MaterialButton
+						android:id="@+id/search_keyword_material_button"
+						android:layout_width="0dp"
+						android:layout_height="wrap_content"
+						android:textSize="14sp"
+						android:padding="5dp"
+						android:text="キーワード検索を開始する"
+						android:background="@color/design_default_color_primary"
+						android:layout_marginEnd="8dp" app:layout_constraintTop_toBottomOf="@+id/keyword_search_edit_text"
+						app:layout_constraintEnd_toEndOf="parent" android:layout_marginStart="8dp"
+						app:layout_constraintStart_toStartOf="parent" android:layout_marginTop="8dp"/>
+			</androidx.constraintlayout.widget.ConstraintLayout>
+
+		</com.google.android.material.card.MaterialCardView>
+
+		<com.google.android.material.card.MaterialCardView
 				android:id="@+id/search_near_meetup_bottom_sheet"
 				android:padding="8dp"
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
 				app:layout_behavior="@string/bottom_sheet_behavior"
-				app:behavior_peekHeight="150dp"
+				app:behavior_peekHeight="300dp"
 				android:background="@android:color/darker_gray"
 				app:cardCornerRadius="18dp"
 				app:behavior_hideable="true"
-				android:elevation="8dp">
+				android:elevation="8dp"
+				tools:visibility="gone">
 
 			<androidx.constraintlayout.widget.ConstraintLayout
 					android:layout_width="match_parent"
@@ -96,7 +138,7 @@
 						app:layout_constraintEnd_toEndOf="parent"
 						app:layout_constraintStart_toStartOf="parent"
 						android:layout_marginStart="8dp"
-						app:layout_constraintTop_toBottomOf="@+id/lon_result_text_view"
+						app:layout_constraintTop_toBottomOf="@+id/lon_text_view"
 						android:layout_marginTop="8dp"/>
 			</androidx.constraintlayout.widget.ConstraintLayout>
 
