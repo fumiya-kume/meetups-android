@@ -41,11 +41,18 @@ class NearMeetupOverviewFragment : Fragment() {
 
     fun setVisibleSearchNearMeetupBottomSheet(visivle: Boolean) {
       val searchNearMeetupBottonSheetBehavior = BottomSheetBehavior.from(binding.searchNearMeetupBottomSheet)
-      if (visivle) BottomSheetBehavior.STATE_COLLAPSED else BottomSheetBehavior.STATE_HIDDEN
+
       searchNearMeetupBottonSheetBehavior.state =
           if (visivle) BottomSheetBehavior.STATE_COLLAPSED else BottomSheetBehavior.STATE_HIDDEN
     }
 
+    fun setVisibleSearchKeywordBottomSheet(visible: Boolean) {
+      val keywordSearchBottomSheetBehavior = BottomSheetBehavior.from(binding.searchKeywordMeetupBottomSheet)
+      keywordSearchBottomSheetBehavior.state =
+          if (visible) BottomSheetBehavior.STATE_COLLAPSED else BottomSheetBehavior.STATE_HIDDEN
+    }
+
+    setVisibleSearchKeywordBottomSheet(false)
     setVisibleSearchNearMeetupBottomSheet(false)
 
     binding.toolbar.inflateMenu(R.menu.event_overview_menu)
@@ -55,12 +62,22 @@ class NearMeetupOverviewFragment : Fragment() {
           Manifest.permission.ACCESS_FINE_LOCATION
         ) == PermissionChecker.PERMISSION_GRANTED
       ) {
-        viewModel.loadCurrentLocation(
-          onError = {
-            Snackbar.make(binding.searchNearMeetupBottomSheet, it, Snackbar.LENGTH_SHORT).show()
-            return@loadCurrentLocation
-          })
-        setVisibleSearchNearMeetupBottomSheet(true)
+        when (it.itemId) {
+          R.id.near_search_item -> {
+            viewModel.loadCurrentLocation(
+              onError = {
+                Snackbar.make(binding.searchNearMeetupBottomSheet, it, Snackbar.LENGTH_SHORT).show()
+                return@loadCurrentLocation
+              })
+            setVisibleSearchNearMeetupBottomSheet(true)
+          }
+          R.id.seach_keyword_item -> {
+            setVisibleSearchKeywordBottomSheet(true)
+          }
+          else -> {
+            // 何もしない
+          }
+        }
 
       } else {
         if (ActivityCompat.shouldShowRequestPermissionRationale(
@@ -107,6 +124,14 @@ class NearMeetupOverviewFragment : Fragment() {
           ).show()
         }
       )
+    }
+
+    binding.searchKeywordMaterialButton.setOnClickListener {
+      val keyword = binding.keywordSearchEditText.text.toString()
+      if (keyword.isEmpty()) {
+        return@setOnClickListener
+      }
+      viewModel.searchWithKeyword(keyword)
     }
     return binding.root
   }
