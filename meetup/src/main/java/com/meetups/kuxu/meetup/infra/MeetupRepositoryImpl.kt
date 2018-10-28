@@ -13,8 +13,8 @@ internal class MeetupRepositoryImpl(
   private val meetupListDataStore: MeetupListDataStore,
   private val currentLocationService: CurrentLocationService
 ) : MeetupRepository {
-  override fun loadMeetupListWithKeyword(): ReceiveChannel<List<MeetupEntity>> {
-    TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+  override fun loadMeetupListWithKeyword(keyword: String): ReceiveChannel<List<MeetupEntity>> = GlobalScope.produce {
+    meetupListDataStore.searchMeetupList(keyword)
   }
 
   override fun loadMeetupList(): ReceiveChannel<List<MeetupEntity>> = GlobalScope.produce {
