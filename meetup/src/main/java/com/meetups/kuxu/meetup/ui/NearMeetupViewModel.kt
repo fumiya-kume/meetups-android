@@ -11,7 +11,7 @@ import kotlinx.coroutines.experimental.channels.consumeEach
 import kotlinx.coroutines.experimental.launch
 
 internal class NearMeetupViewModel(
-  nearMeetupListLiveDataFactory: MeetupListLiveDataFactory,
+  private val nearMeetupListLiveDataFactory: MeetupListLiveDataFactory,
   private val currentLocationService: CurrentLocationService
 ) : ViewModel() {
   var meetupListLiveData = nearMeetupListLiveDataFactory.create()
@@ -46,5 +46,9 @@ internal class NearMeetupViewModel(
     currentLocationSnapshot?.let {
       meetupListLiveData.loadNearMeetup()
     }
+  }
+
+  fun searchWithKeyword(keyword: String) {
+    meetupListLiveData.searchWithKeyword(keyword)
   }
 }

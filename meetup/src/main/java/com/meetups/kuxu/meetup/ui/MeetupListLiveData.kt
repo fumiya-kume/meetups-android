@@ -42,4 +42,20 @@ internal class MeetupListLiveData(
       }
     }
   }
+
+  fun searchWithKeyword(keyword: String): Unit {
+    GlobalScope.launch(Dispatchers.IO) {
+      try {
+        val nearMeetupList = nearMeetupRepository.loadNearMeetupList()
+          .receive()
+        GlobalScope.launch(Dispatchers.Main) {
+          value = meetupRowBindingModelConverter.convert(nearMeetupList)
+        }
+      } catch (e: Exception) {
+        GlobalScope.launch(Dispatchers.Main) {
+          value = emptyList()
+        }
+      }
+    }
+  }
 }
