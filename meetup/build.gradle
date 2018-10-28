@@ -57,7 +57,6 @@ dependencies {
     implementation 'com.google.android.material:material:1.0.0'
     testImplementation "org.jetbrains.kotlin:kotlin-test:$kotlin_version"
 
-
     // Kotlin Extension
     implementation 'androidx.core:core-ktx:1.0.0'
 
@@ -87,14 +86,11 @@ dependencies {
     implementation 'org.jetbrains.spek:spek-subject-extension:1.1.5'
     implementation 'org.junit.platform:junit-platform-runner:1.0.0'
 
-    // Rx 関連
-    implementation 'androidx.lifecycle:lifecycle-reactivestreams-ktx:2.0.0'
-    implementation 'io.reactivex.rxjava2:rxjava:2.1.13'
-    implementation 'io.reactivex.rxjava2:rxandroid:2.0.2'
-    implementation 'io.reactivex.rxjava2:rxkotlin:2.2.0'
-
     // Kotlin Coroutine
     def kotlin_coroutine_version = '0.30.2'
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$kotlin_coroutine_version"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$kotlin_coroutine_version"
+
+    // Google Play Services
+    implementation "com.google.android.gms:play-services-location:16.0.0"
 }
