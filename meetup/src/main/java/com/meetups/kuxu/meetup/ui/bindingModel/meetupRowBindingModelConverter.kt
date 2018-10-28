@@ -7,7 +7,8 @@ internal object meetupRowBindingModelConverter {
     MeetupRowBindingModel(
       entity.id,
       entity.title,
-      entity.meetupLink
+      entity.meetupLink,
+      "${entity.distance}km"
     )
 
   fun convert(entityList: List<MeetupEntity>) = entityList.map { convert(it) }

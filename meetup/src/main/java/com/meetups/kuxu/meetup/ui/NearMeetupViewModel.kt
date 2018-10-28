@@ -1,42 +1,50 @@
 package com.meetups.kuxu.meetup.ui
 
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.meetups.kuxu.meetup.domain.CurrentLocationService
 import com.meetups.kuxu.meetup.ui.bindingModel.CurrentLocationBindingModel
 import com.meetups.kuxu.meetup.ui.bindingModel.CurrentLocationBindingModelConverter
-import io.reactivex.rxkotlin.subscribeBy
+import kotlinx.coroutines.experimental.Dispatchers
 import kotlinx.coroutines.experimental.GlobalScope
+import kotlinx.coroutines.experimental.channels.consumeEach
 import kotlinx.coroutines.experimental.launch
 
 internal class NearMeetupViewModel(
-  nearMeetupListLiveDataFactory: NearMeetupListLiveDataFactory,
+  nearMeetupListLiveDataFactory: MeetupListLiveDataFactory,
   private val currentLocationService: CurrentLocationService
 ) : ViewModel() {
-  val nearMeetupListLiveData = nearMeetupListLiveDataFactory.create()
+  var meetupListLiveData = nearMeetupListLiveDataFactory.create()
+  var currentLocationLiveData = MutableLiveData<CurrentLocationBindingModel>()
 
   fun loadCurrentLocation(
-    onError: (message: String) -> Unit,
-    onSuccess: (CurrentLocationBindingModel) -> Unit
+    onError: (message: String) -> Unit
   ) {
     GlobalScope.launch {
-      currentLocationService.loadCurrentLocation()
-        .subscribeBy(
-          onError = {
-            val errorMessage = "内部エラーが発生しました. 権限周りで発生しているようです"
-            onError(
-              errorMessage
-            )
-          },
-          onComplete = {
-            val errorMessage = "現在地を取得することができませんでした"
-            onError(errorMessage)
-          },
-          onSuccess = {
-            val currentLocation = CurrentLocationBindingModelConverter.convert(it)
-            onSuccess(currentLocation)
-          }
-        )
+      try {
+        GlobalScope.launch(Dispatchers.IO) {
+          currentLocationService.loadCurrentLocation().openSubscription()
+            .consumeEach {
+              GlobalScope.launch(Dispatchers.Main) {
+                currentLocationLiveData.value = CurrentLocationBindingModelConverter.convert(it)
+              }
+            }
+        }
+      } catch (e: Exception) {
+        onError("エラーが発生しました...")
+      }
     }
-    // 現在地から指定して取得できるRepository の作成
+  }
+
+  fun searchWithLocation(
+    onCurrentLocationMissing: (message: String) -> Unit
+  ) {
+    val currentLocationSnapshot = currentLocationLiveData.value
+    if (currentLocationSnapshot == null) {
+      onCurrentLocationMissing("現在地の取得に失敗しました")
+    }
+    currentLocationSnapshot?.let {
+      meetupListLiveData.loadNearMeetup()
+    }
   }
 }

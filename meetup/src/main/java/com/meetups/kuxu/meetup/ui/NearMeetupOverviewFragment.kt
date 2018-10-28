@@ -41,7 +41,7 @@ class NearMeetupOverviewFragment : Fragment() {
 
     fun setVisibleSearchNearMeetupBottomSheet(visivle: Boolean) {
       val searchNearMeetupBottonSheetBehavior = BottomSheetBehavior.from(binding.searchNearMeetupBottomSheet)
-      val state = if (visivle) BottomSheetBehavior.STATE_COLLAPSED else BottomSheetBehavior.STATE_HIDDEN
+      if (visivle) BottomSheetBehavior.STATE_COLLAPSED else BottomSheetBehavior.STATE_HIDDEN
       searchNearMeetupBottonSheetBehavior.state =
           if (visivle) BottomSheetBehavior.STATE_COLLAPSED else BottomSheetBehavior.STATE_HIDDEN
     }
@@ -58,13 +58,10 @@ class NearMeetupOverviewFragment : Fragment() {
         viewModel.loadCurrentLocation(
           onError = {
             Snackbar.make(binding.searchNearMeetupBottomSheet, it, Snackbar.LENGTH_SHORT).show()
-          },
-          onSuccess = {
-            binding.lonResultTextView.text = it.lon.toString()
-            binding.latResultTextView.text = it.lat.toString()
-            setVisibleSearchNearMeetupBottomSheet(true)
-          }
-        )
+            return@loadCurrentLocation
+          })
+        setVisibleSearchNearMeetupBottomSheet(true)
+
       } else {
         if (ActivityCompat.shouldShowRequestPermissionRationale(
             activity as Activity,
@@ -81,12 +78,9 @@ class NearMeetupOverviewFragment : Fragment() {
             binding.searchNearMeetupBottomSheet,
             "設定から権限を有効にしないと現在地からの検索が使えません...><",
             Snackbar.LENGTH_SHORT
-          )
-            .show()
+          ).show()
         }
-
       }
-
       true
     }
 
@@ -94,12 +88,26 @@ class NearMeetupOverviewFragment : Fragment() {
 
     binding.nearRowRecyclerView.adapter = adapter
 
-    viewModel.nearMeetupListLiveData.observeForever {
+    viewModel.meetupListLiveData.observeForever {
       adapter.submitList(it)
     }
 
+    viewModel.currentLocationLiveData.observeForever {
+      binding.lonResultTextView.text = it.lon.toString()
+      binding.latResultTextView.text = it.lat.toString()
+    }
+
+    binding.searchNearMeetupMaterialButton.setOnClickListener {
+      viewModel.searchWithLocation(
+        onCurrentLocationMissing = { message ->
+          Snackbar.make(
+            binding.searchNearMeetupBottomSheet,
+            message,
+            Snackbar.LENGTH_SHORT
+          ).show()
+        }
+      )
+    }
     return binding.root
   }
-
-
 }
