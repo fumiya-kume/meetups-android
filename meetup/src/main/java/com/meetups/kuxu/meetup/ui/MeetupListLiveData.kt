@@ -46,7 +46,7 @@ internal class MeetupListLiveData(
   fun searchWithKeyword(keyword: String): Unit {
     GlobalScope.launch(Dispatchers.IO) {
       try {
-        val nearMeetupList = nearMeetupRepository.loadNearMeetupList()
+        val nearMeetupList = nearMeetupRepository.loadMeetupListWithKeyword(keyword)
           .receive()
         GlobalScope.launch(Dispatchers.Main) {
           value = meetupRowBindingModelConverter.convert(nearMeetupList)
