@@ -33,7 +33,15 @@ public class MeetupSearchBottomSheetFragment : BottomSheetDialogFragment() {
     binding.startSearchMaterialButton.setOnClickListener {
       searchMeetupClickListener?.let { listener ->
         binding.bindingModel?.let { bindingModel ->
-          listener.onClick(bindingModel)
+          val keyword = binding.seasrchKeywordTextInputEditText.text.toString() ?: ""
+          val nearSearch = binding.nearSearchCheckBox.isChecked
+
+          listener.onClick(
+            bindingModel.copy(
+              nearSearch = nearSearch,
+              keyword = keyword
+            )
+          )
         }
       }
     }

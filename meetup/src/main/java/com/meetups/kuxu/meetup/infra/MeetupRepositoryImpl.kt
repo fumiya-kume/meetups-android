@@ -13,6 +13,7 @@ internal class MeetupRepositoryImpl(
   private val meetupListDataStore: MeetupListDataStore,
   private val currentLocationService: CurrentLocationService
 ) : MeetupRepository {
+
   override fun loadMeetupList(): ReceiveChannel<List<MeetupEntity>> = GlobalScope.produce {
     val hoge = meetupListDataStore.loadMeetupList().receive().events.map {
       val meetupLocation = LocationEntity(it.lat ?: 0.0, it.lon ?: 0.0)

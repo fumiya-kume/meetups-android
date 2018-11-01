@@ -9,5 +9,5 @@ import org.koin.dsl.module.module
 internal val domainModule = module {
   factory { MeetupRepositoryImpl(get(), get()) as MeetupRepository }
   factory { CurrentLocationServiceImpl(androidApplication()) as CurrentLocationService }
-  factory { SearchMeetupUsecaseImpl() as SearchMeetupUseacase }
+  factory { SearchMeetupUsecaseImpl(get(), get()) as SearchMeetupUseacase }
 }

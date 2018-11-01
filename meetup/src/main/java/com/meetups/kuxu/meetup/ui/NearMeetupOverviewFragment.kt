@@ -89,6 +89,8 @@ class NearMeetupOverviewFragment : Fragment() {
       meetupSearchBottomSheetFragment.searchMeetupClickListener = object :
         OnSearchMeetupClickListener {
         override fun onClick(bindingModel: MeetupSearchBindingModel) {
+
+          viewModel.search(bindingModel)
           meetupSearchBottomSheetFragment.dismiss()
         }
       }
