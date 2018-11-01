@@ -30,19 +30,6 @@ internal class NearMeetupViewModelTest : SubjectSpek<NearMeetupViewModel>({
   }
 
   subject {
-    NearMeetupViewModel(meetupListLiveDataFactory, currentLocationService)
+    NearMeetupViewModel(meetupListLiveDataFactory)
   }
-
-  given("キーワード検索すると結果のリストが表示される") {
-    val keyword = "hello"
-    doNothing().`when`(meetupListLiveData).searchWithKeyword(keyword)
-    on("キーワード検索する") {
-      subject.searchWithKeyword(keyword)
-      it("キーワード検索される") {
-        verify(meetupListLiveData, times(1)).searchWithKeyword(keyword)
-      }
-    }
-  }
-
-
 })

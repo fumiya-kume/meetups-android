@@ -5,5 +5,5 @@ import org.koin.dsl.module.module
 
 internal val nearMeetupModule = module {
   factory { MeetupListLiveDataFactory(get()) }
-  viewModel { NearMeetupViewModel(get(), get()) }
+  viewModel { NearMeetupViewModel(get()) }
 }
