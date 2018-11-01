@@ -1,19 +1,15 @@
 package com.meetups.kuxu.meetup.ui
 
 
-import android.Manifest
-import android.app.Activity
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.app.ActivityCompat
-import androidx.core.content.PermissionChecker
 import androidx.fragment.app.Fragment
-import com.google.android.material.snackbar.Snackbar
-import com.meetups.kuxu.meetup.R
 import com.meetups.kuxu.meetup.databinding.FragmentNearMeetupOverviewBinding
 import com.meetups.kuxu.meetup.ui.bindingModel.MeetupSearchBindingModel
+import com.meetups.kuxu.meetup.ui.dialog.MeetupSearchBottomSheetFragment
+import com.meetups.kuxu.meetup.ui.dialog.OnSearchMeetupClickListener
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 /**
@@ -90,7 +86,8 @@ class NearMeetupOverviewFragment : Fragment() {
       val meetupSearchBottomSheetFragment = MeetupSearchBottomSheetFragment()
       meetupSearchBottomSheetFragment.show(fragmentManager, meetupSearchBottomSheetFragment.tag)
 
-      meetupSearchBottomSheetFragment.searchMeetupClickListener = object : OnSearchMeetupClickListener{
+      meetupSearchBottomSheetFragment.searchMeetupClickListener = object :
+        OnSearchMeetupClickListener {
         override fun onClick(bindingModel: MeetupSearchBindingModel) {
           meetupSearchBottomSheetFragment.dismiss()
         }

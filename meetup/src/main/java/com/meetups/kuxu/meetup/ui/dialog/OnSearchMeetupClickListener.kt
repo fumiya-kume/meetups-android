@@ -1,4 +1,4 @@
-package com.meetups.kuxu.meetup.ui
+package com.meetups.kuxu.meetup.ui.dialog
 
 import com.meetups.kuxu.meetup.ui.bindingModel.MeetupSearchBindingModel
 

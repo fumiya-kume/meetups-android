@@ -1,4 +1,4 @@
-package com.meetups.kuxu.meetup.ui
+package com.meetups.kuxu.meetup.ui.dialog
 
 import android.os.Bundle
 import android.view.LayoutInflater
