@@ -43,4 +43,6 @@ internal class NearMeetupViewModelTest : SubjectSpek<NearMeetupViewModel>({
       }
     }
   }
+
+
 })
