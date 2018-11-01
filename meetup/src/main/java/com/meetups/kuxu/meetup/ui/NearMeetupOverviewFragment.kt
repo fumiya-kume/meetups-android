@@ -13,6 +13,7 @@ import androidx.fragment.app.Fragment
 import com.google.android.material.snackbar.Snackbar
 import com.meetups.kuxu.meetup.R
 import com.meetups.kuxu.meetup.databinding.FragmentNearMeetupOverviewBinding
+import com.meetups.kuxu.meetup.ui.bindingModel.MeetupSearchBindingModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 /**
@@ -88,6 +89,12 @@ class NearMeetupOverviewFragment : Fragment() {
     binding.searchMeetupMaterialButton.setOnClickListener {
       val meetupSearchBottomSheetFragment = MeetupSearchBottomSheetFragment()
       meetupSearchBottomSheetFragment.show(fragmentManager, meetupSearchBottomSheetFragment.tag)
+
+      meetupSearchBottomSheetFragment.searchMeetupClickListener = object : OnSearchMeetupClickListener{
+        override fun onClick(bindingModel: MeetupSearchBindingModel) {
+          meetupSearchBottomSheetFragment.dismiss()
+        }
+      }
     }
 
     return binding.root
