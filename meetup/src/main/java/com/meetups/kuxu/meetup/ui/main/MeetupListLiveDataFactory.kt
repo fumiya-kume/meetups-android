@@ -1,4 +1,4 @@
-package com.meetups.kuxu.meetup.ui
+package com.meetups.kuxu.meetup.ui.main
 
 import com.meetups.kuxu.meetup.domain.MeetupRepository
 import com.meetups.kuxu.meetup.domain.SearchMeetupUseacase

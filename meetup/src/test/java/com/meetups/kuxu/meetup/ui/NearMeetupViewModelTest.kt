@@ -3,6 +3,9 @@ package com.meetups.kuxu.meetup.ui
 import android.app.Application
 import com.meetups.kuxu.meetup.service.ConnpassEventPageViewerService
 import com.meetups.kuxu.meetup.ui.bindingModel.MeetupRowBindingModel
+import com.meetups.kuxu.meetup.ui.main.MeetupListLiveData
+import com.meetups.kuxu.meetup.ui.main.MeetupListLiveDataFactory
+import com.meetups.kuxu.meetup.ui.main.NearMeetupViewModel
 import org.jetbrains.spek.api.dsl.given
 import org.jetbrains.spek.api.dsl.it
 import org.jetbrains.spek.api.dsl.on

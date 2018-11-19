@@ -1,4 +1,4 @@
-package com.meetups.kuxu.meetup.ui
+package com.meetups.kuxu.meetup.ui.main
 
 
 import android.content.Context

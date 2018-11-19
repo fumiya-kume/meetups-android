@@ -5,6 +5,6 @@
             app:startDestination="@id/nearMeetupOverviewFragment">
 
     <fragment android:id="@+id/nearMeetupOverviewFragment"
-              android:name="com.meetups.kuxu.meetup.ui.NearMeetupOverviewFragment"
+              android:name="com.meetups.kuxu.meetup.ui.main.NearMeetupOverviewFragment"
               android:label="fragment_near_meetup_overview" tools:layout="@layout/fragment_near_meetup_overview"/>
 </navigation>
