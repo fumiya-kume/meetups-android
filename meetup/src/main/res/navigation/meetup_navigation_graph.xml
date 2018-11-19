@@ -6,5 +6,13 @@
 
     <fragment android:id="@+id/nearMeetupOverviewFragment"
               android:name="com.meetups.kuxu.meetup.ui.main.NearMeetupOverviewFragment"
-              android:label="fragment_near_meetup_overview" tools:layout="@layout/fragment_near_meetup_overview"/>
+              android:label="fragment_near_meetup_overview"
+              tools:layout="@layout/fragment_near_meetup_overview">
+        <action android:id="@+id/action_nearMeetupOverviewFragment_to_permissionErrorFragment"
+                app:destination="@id/permissionErrorFragment"/>
+    </fragment>
+    <fragment android:id="@+id/permissionErrorFragment"
+              android:name="com.meetups.kuxu.meetup.ui.permission.PermissionErrorFragment"
+              android:label="PermissionErrorFragment"
+              tools:layout="@layout/fragment_permission_error" />
 </navigation>
