@@ -38,10 +38,15 @@ internal class MeetupRowAdapter(
     parent
   )
 
+  var onEventSelectedListener: OnEventSelectedListener? = null
+
   override fun onBindViewHolder(
     holder: MeetupRowViewHolder,
     position: Int
   ) {
-    holder.bindTo(getItem(position))
+    holder.bindTo(
+      getItem(position),
+      onEventSelectedListener
+    )
   }
 }

@@ -24,7 +24,13 @@ internal class MeetupRowViewHolder(
       )
   }
 
-  fun bindTo(bindingModel: MeetupRowBindingModel) {
+  fun bindTo(
+    bindingModel: MeetupRowBindingModel,
+    eventSelectedListener: OnEventSelectedListener?
+  ) {
     binding.bindingModel = bindingModel
+    binding.root.setOnClickListener {
+      eventSelectedListener?.onSelected(bindingModel)
+    }
   }
 }

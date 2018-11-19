@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.meetups.kuxu.meetup.databinding.FragmentNearMeetupOverviewBinding
+import com.meetups.kuxu.meetup.ui.bindingModel.MeetupRowBindingModel
 import com.meetups.kuxu.meetup.ui.bindingModel.MeetupSearchBindingModel
 import com.meetups.kuxu.meetup.ui.dialog.MeetupSearchBottomSheetFragment
 import com.meetups.kuxu.meetup.ui.dialog.OnSearchMeetupClickListener
@@ -93,6 +94,12 @@ class NearMeetupOverviewFragment : Fragment() {
           viewModel.search(bindingModel)
           meetupSearchBottomSheetFragment.dismiss()
         }
+      }
+    }
+
+    adapter.onEventSelectedListener = object : OnEventSelectedListener {
+      override fun onSelected(bindingModel: MeetupRowBindingModel) {
+        viewModel.showEventPage(bindingModel)
       }
     }
 
