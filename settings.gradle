@@ -1,1 +1,1 @@
-include ':app', ':meetup', ':connpass_api'
+include ':app', ':meetup', ':connpass_api', ':setting'

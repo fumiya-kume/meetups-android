@@ -1,4 +1,4 @@
-package com.meetups.kuxu.meetup.ui
+package com.meetups.kuxu.meetup.ui.main
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -24,7 +24,13 @@ internal class MeetupRowViewHolder(
       )
   }
 
-  fun bindTo(bindingModel: MeetupRowBindingModel) {
+  fun bindTo(
+    bindingModel: MeetupRowBindingModel,
+    eventSelectedListener: OnEventSelectedListener?
+  ) {
     binding.bindingModel = bindingModel
+    binding.root.setOnClickListener {
+      eventSelectedListener?.onSelected(bindingModel)
+    }
   }
 }
