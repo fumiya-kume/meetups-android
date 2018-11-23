@@ -5,9 +5,9 @@ import com.meetups.kuxu.connpass_api.entity.EventJson
 internal object MeetupEntityConverter {
   fun convert(eventJson: EventJson) =
     MeetupEntity(
-      eventJson.eventId,
+      eventJson.id,
       eventJson.title,
-      eventJson.eventUrl,
+      eventJson. event_url,
       Int.MAX_VALUE,
       LocationEntity(
         eventJson.lat ?: 0.0,
