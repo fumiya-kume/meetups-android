@@ -21,7 +21,7 @@ internal class MeetupRepositoryImpl(
         it.id,
         it.title,
         it.event_url,
-        currentLocationService.distanceKmToCurrentLocation(meetupLocation).openSubscription().receive(),
+        0,
         meetupLocation
       )
     }
