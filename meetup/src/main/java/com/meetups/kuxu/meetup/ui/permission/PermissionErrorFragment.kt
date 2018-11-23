@@ -11,11 +11,16 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
+import androidx.navigation.Navigation
+import com.meetups.kuxu.meetup.R
 import com.meetups.kuxu.meetup.databinding.FragmentPermissionErrorBinding
 
 
 class PermissionErrorFragment : Fragment() {
 
+  override fun onCreate(savedInstanceState: Bundle?) {
+    super.onCreate(savedInstanceState)
+  }
 
   override fun onCreateView(
     inflater: LayoutInflater, container: ViewGroup?,
@@ -49,8 +54,11 @@ class PermissionErrorFragment : Fragment() {
           arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
           0
         )
+
+        Navigation.findNavController(binding.root).navigate(R.id.action_global_nearMeetupOverviewFragment)
       }
     }
+
 
     return binding.root
   }
