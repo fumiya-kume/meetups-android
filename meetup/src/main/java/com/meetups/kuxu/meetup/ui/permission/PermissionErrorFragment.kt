@@ -11,7 +11,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
-import androidx.navigation.Navigation
+import androidx.navigation.findNavController
 import com.meetups.kuxu.meetup.R
 import com.meetups.kuxu.meetup.databinding.FragmentPermissionErrorBinding
 
@@ -34,20 +34,10 @@ class PermissionErrorFragment : Fragment() {
       )
 
     binding.navigateAppSettingMaterialButton.setOnClickListener {
-      val intent = Intent()
-      intent.action = Settings.ACTION_APPLICATION_DETAILS_SETTINGS
-      val packageName = context?.packageName ?: return@setOnClickListener
-      val uri = Uri.fromParts(
-        "package",
-        packageName,
-        null
-      )
-      intent.data = uri
-      startActivity(intent)
+      navigateSettingActivity()
     }
 
     binding.locationPermissionMaterialButton.setOnClickListener {
-      val a = activity
       activity?.let {
         ActivityCompat.requestPermissions(
           activity as Activity,
@@ -55,11 +45,26 @@ class PermissionErrorFragment : Fragment() {
           0
         )
 
-        Navigation.findNavController(binding.root).navigate(R.id.action_global_nearMeetupOverviewFragment)
+        view?.let {
+          it.findNavController().navigate(R.id.action_global_nearMeetupOverviewFragment)
+        }
       }
     }
 
-
     return binding.root
+  }
+
+  private fun navigateSettingActivity() {
+    val intent = Intent().apply {
+      this.action = Settings.ACTION_APPLICATION_DETAILS_SETTINGS
+      val packageName = context?.packageName ?: return
+      val uri = Uri.fromParts(
+        "package",
+        packageName,
+        null
+      )
+      this.data = uri
+    }
+    startActivity(intent)
   }
 }

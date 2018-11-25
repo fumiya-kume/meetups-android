@@ -37,7 +37,7 @@ internal class MeetupListLiveData(
         launch(Dispatchers.Main) {
           value = meetupRowBindingModelConverter.convert(newList)
         }
-        
+
       } catch (e: Exception) {
         GlobalScope.launch(Dispatchers.Main) {
           value = emptyList()
