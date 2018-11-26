@@ -1,6 +1,7 @@
 package com.meetups.kuxu.meetup.infra
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.content.Context
 import android.location.Location
 import androidx.core.content.PermissionChecker
@@ -31,14 +32,10 @@ internal class CurrentLocationServiceImpl(
     return broadcast
   }
 
+  @SuppressLint("MissingPermission")
   override fun loadCurrentLocation(): BroadcastChannel<LocationEntity> {
     val broadcast = ConflatedBroadcastChannel<LocationEntity>()
     try {
-      if (PermissionChecker.checkSelfPermission(
-          context,
-          Manifest.permission.ACCESS_FINE_LOCATION
-        ) == PermissionChecker.PERMISSION_GRANTED
-      ) {
         val locationProviderClient = FusedLocationProviderClient(context)
         val lastLocation = locationProviderClient.lastLocation
         lastLocation.addOnSuccessListener {
@@ -49,7 +46,6 @@ internal class CurrentLocationServiceImpl(
             )
             broadcast.send(currenLocation)
           }
-        }
       }
     } catch (e: Exception) {
       throw e
