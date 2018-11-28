@@ -49,48 +49,6 @@ class NearMeetupOverviewFragment : Fragment() {
 
     val viewModel: NearMeetupViewModel by viewModel()
 
-//    binding.toolbar.inflateMenu(R.menu.event_overview_menu)
-//    binding.toolbar.setOnMenuItemClickListener {
-//      if (PermissionChecker.checkSelfPermission(
-//          requireContext(),
-//          Manifest.permission.ACCESS_FINE_LOCATION
-//        ) == PermissionChecker.PERMISSION_GRANTED
-//      ) {
-//        when (it.itemId) {
-//          R.id.near_search_item -> {
-//            viewModel.loadCurrentLocation(
-//              onError = {
-//                return@loadCurrentLocation
-//              })
-//          }
-//          R.id.seach_keyword_item -> {
-//            val meetupSearchBottomSheetFragment = MeetupSearchBottomSheetFragment()
-//            meetupSearchBottomSheetFragment.show(fragmentManager, meetupSearchBottomSheetFragment.tag)
-//
-//          }
-//          else -> {
-//            // 何もしない
-//          }
-//        }
-//
-//      } else {
-//        if (ActivityCompat.shouldShowRequestPermissionRationale(
-//            activity as Activity,
-//            Manifest.permission.ACCESS_FINE_LOCATION
-//          )
-//        ) {
-//          ActivityCompat.requestPermissions(
-//            activity as Activity,
-//            arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
-//            0
-//          )
-//        } else {
-//
-//        }
-//      }
-//      true
-//    }
-
     val adapter = MeetupRowAdapter(requireContext())
     binding.nearRowRecyclerView.adapter = adapter
     viewModel.meetupListLiveData.observeForever {
