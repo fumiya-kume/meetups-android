@@ -28,4 +28,8 @@ internal class MeetupRepositoryImpl(
 
     send(hoge)
   }
+
+  override fun searchMeetupList(keyword: String): ReceiveChannel<List<MeetupEntity>> {
+    TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+  }
 }
