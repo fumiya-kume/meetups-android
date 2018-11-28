@@ -1,7 +1,6 @@
 package com.meetups.kuxu.meetup.infra
 
 import com.meetups.kuxu.connpass_api.MeetupListDataStore
-import com.meetups.kuxu.meetup.domain.CurrentLocationService
 import com.meetups.kuxu.meetup.domain.MeetupRepository
 import com.meetups.kuxu.meetup.entity.LocationEntity
 import com.meetups.kuxu.meetup.entity.MeetupEntity
@@ -10,13 +9,26 @@ import kotlinx.coroutines.experimental.channels.ReceiveChannel
 import kotlinx.coroutines.experimental.channels.produce
 
 internal class MeetupRepositoryImpl(
-  private val meetupListDataStore: MeetupListDataStore,
-  private val currentLocationService: CurrentLocationService
+  private val meetupListDataStore: MeetupListDataStore
 ) : MeetupRepository {
 
   override fun loadMeetupList(): ReceiveChannel<List<MeetupEntity>> = GlobalScope.produce {
     val hoge = meetupListDataStore.loadMeetupList().receive().map {
-      val meetupLocation = LocationEntity(it.lat ?: 0.0, it.lon ?: 0.0)
+      val meetupLocation = LocationEntity(it.lat, it.lon)
+      MeetupEntity(
+        it.id,
+        it.title,
+        it.event_url,
+        0,
+        meetupLocation
+      )
+    }
+    send(hoge)
+  }
+
+  override fun searchMeetupList(keyword: String): ReceiveChannel<List<MeetupEntity>> = GlobalScope.produce {
+    val hoge = meetupListDataStore.searchMeetupList(keyword).receive().map {
+      val meetupLocation = LocationEntity(it.lat, it.lon)
       MeetupEntity(
         it.id,
         it.title,

@@ -36,12 +36,20 @@ internal class MeetupListDataStoreImpl : MeetupListDataStore {
     }
   }
 
-  override fun searchMeetupList(keyword: String): ReceiveChannel<MeetupJson> = GlobalScope.produce {
+  override fun searchMeetupList(keyword: String): ReceiveChannel<List<EventJson>> = GlobalScope.produce {
     runBlocking {
-      "https://connpass.com/api/v1/event/?count=30&keyword=${keyword}".httpGet().awaitResultObject<MeetupJson>().await()
+      "https://meetups-api.azurewebsites.net/search?keyword=${keyword}"
+        .httpGet()
+        .awaitStringResponse()
+        .third
         .fold(
           success = {
-            send(it)
+            val type: Type = Types.newParameterizedType(List::class.javaObjectType, EventJson::class.javaObjectType)
+            val jsonAdapter: JsonAdapter<List<EventJson>> = Moshi.Builder().build().adapter(type)
+            val result = jsonAdapter.fromJson(it)
+            result?.let {
+              send(it)
+            }
           },
           failure = {
             throw it

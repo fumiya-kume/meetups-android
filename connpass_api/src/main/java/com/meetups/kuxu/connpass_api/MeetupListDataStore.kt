@@ -6,5 +6,5 @@ import kotlinx.coroutines.experimental.channels.ReceiveChannel
 
 public interface MeetupListDataStore {
   fun loadMeetupList(): ReceiveChannel<List<EventJson>>
-  fun searchMeetupList(keyword: String): ReceiveChannel<MeetupJson>
+  fun searchMeetupList(keyword: String): ReceiveChannel<List<EventJson>>
 }

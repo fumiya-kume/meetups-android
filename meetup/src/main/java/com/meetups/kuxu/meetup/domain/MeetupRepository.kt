@@ -5,4 +5,5 @@ import kotlinx.coroutines.experimental.channels.ReceiveChannel
 
 internal interface MeetupRepository {
   fun loadMeetupList(): ReceiveChannel<List<MeetupEntity>>
+  fun searchMeetupList(keyword: String): ReceiveChannel<List<MeetupEntity>>
 }
