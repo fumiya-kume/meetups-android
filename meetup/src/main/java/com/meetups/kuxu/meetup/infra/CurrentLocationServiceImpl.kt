@@ -6,12 +6,12 @@ import android.location.Location
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.meetups.kuxu.meetup.domain.CurrentLocationService
 import com.meetups.kuxu.meetup.entity.LocationEntity
-import kotlinx.coroutines.experimental.Dispatchers
-import kotlinx.coroutines.experimental.GlobalScope
-import kotlinx.coroutines.experimental.channels.BroadcastChannel
-import kotlinx.coroutines.experimental.channels.ConflatedBroadcastChannel
-import kotlinx.coroutines.experimental.channels.consumeEach
-import kotlinx.coroutines.experimental.launch
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.channels.BroadcastChannel
+import kotlinx.coroutines.channels.ConflatedBroadcastChannel
+import kotlinx.coroutines.channels.consumeEach
+import kotlinx.coroutines.launch
 
 internal class CurrentLocationServiceImpl(
   private val context: Context

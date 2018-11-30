@@ -1,7 +1,7 @@
 package com.meetups.kuxu.meetup.domain
 
 import com.meetups.kuxu.meetup.entity.MeetupEntity
-import kotlinx.coroutines.experimental.channels.ReceiveChannel
+import kotlinx.coroutines.channels.ReceiveChannel
 
 internal interface MeetupRepository {
   fun loadMeetupList(): ReceiveChannel<List<MeetupEntity>>

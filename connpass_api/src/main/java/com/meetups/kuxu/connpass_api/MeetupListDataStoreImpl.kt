@@ -3,14 +3,13 @@ package com.meetups.kuxu.connpass_api
 import awaitStringResponse
 import com.github.kittinunf.fuel.httpGet
 import com.meetups.kuxu.connpass_api.entity.EventJson
-import com.meetups.kuxu.connpass_api.entity.MeetupJson
 import com.squareup.moshi.JsonAdapter
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.Types
-import kotlinx.coroutines.experimental.GlobalScope
-import kotlinx.coroutines.experimental.channels.ReceiveChannel
-import kotlinx.coroutines.experimental.channels.produce
-import kotlinx.coroutines.experimental.runBlocking
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.channels.ReceiveChannel
+import kotlinx.coroutines.channels.produce
+import kotlinx.coroutines.runBlocking
 import java.lang.reflect.Type
 
 internal class MeetupListDataStoreImpl : MeetupListDataStore {
