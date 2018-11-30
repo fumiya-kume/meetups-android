@@ -35,4 +35,10 @@ dependencies {
     androidTestImplementation 'androidx.test:runner:1.1.0-alpha3'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0-alpha3'
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+
+    // Navigation Component
+    implementation 'android.arch.navigation:navigation-fragment:1.0.0-alpha06'
+    implementation 'android.arch.navigation:navigation-ui:1.0.0-alpha06'
+    implementation 'android.arch.navigation:navigation-fragment-ktx:1.0.0-alpha06'
+    implementation 'android.arch.navigation:navigation-ui-ktx:1.0.0-alpha06'
 }
