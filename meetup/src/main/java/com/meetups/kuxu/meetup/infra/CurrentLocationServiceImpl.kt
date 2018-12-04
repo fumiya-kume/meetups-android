@@ -6,49 +6,40 @@ import android.location.Location
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.meetups.kuxu.meetup.domain.CurrentLocationService
 import com.meetups.kuxu.meetup.entity.LocationEntity
-import kotlinx.coroutines.experimental.Dispatchers
-import kotlinx.coroutines.experimental.GlobalScope
-import kotlinx.coroutines.experimental.channels.BroadcastChannel
-import kotlinx.coroutines.experimental.channels.ConflatedBroadcastChannel
-import kotlinx.coroutines.experimental.channels.consumeEach
-import kotlinx.coroutines.experimental.launch
+import kotlinx.coroutines.*
+import kotlinx.coroutines.channels.BroadcastChannel
+import kotlin.coroutines.resume
+import kotlin.coroutines.suspendCoroutine
 
 internal class CurrentLocationServiceImpl(
   private val context: Context
 ) : CurrentLocationService {
 
-  override fun distanceKmToCurrentLocation(locationEntity: LocationEntity): BroadcastChannel<Int> {
-    val broadcast = BroadcastChannel<Int>(10)
-    GlobalScope.launch(Dispatchers.Unconfined) {
-      loadCurrentLocation().consumeEach {
-        val resultList = FloatArray(3)
-        Location.distanceBetween(it.lat, it.lon, locationEntity.lat, locationEntity.lon, resultList)
-        val km = (resultList[0] / 1000).toInt()
-        broadcast.send(km)
-      }
+  override fun distanceKmToCurrentLocation(locationEntity: LocationEntity) = GlobalScope.async{
+    runBlocking {
+      val currentLocation = loadCurrentLocation()
+      val resultList = FloatArray(3)
+      Location.distanceBetween(currentLocation.lat, currentLocation.lon, locationEntity.lat, locationEntity.lon, resultList)
+      val km = (resultList[0] / 1000).toInt()
+      return@runBlocking km
     }
-    return broadcast
   }
 
   @SuppressLint("MissingPermission")
-  override fun loadCurrentLocation(): BroadcastChannel<LocationEntity> {
-    val broadcast = ConflatedBroadcastChannel<LocationEntity>()
+  override suspend fun loadCurrentLocation() = suspendCoroutine<LocationEntity> { cont ->
     try {
-        val locationProviderClient = FusedLocationProviderClient(context)
-        val lastLocation = locationProviderClient.lastLocation
+      val locationProviderClient = FusedLocationProviderClient(context)
+      val lastLocation = locationProviderClient.lastLocation
         lastLocation.addOnSuccessListener {
-          GlobalScope.launch(Dispatchers.Unconfined) {
-            val currenLocation = LocationEntity(
+          cont.resume(
+            LocationEntity(
               it.latitude,
               it.longitude
             )
-            broadcast.send(currenLocation)
-          }
-      }
+          )
+        }
     } catch (e: Exception) {
       throw e
     }
-    return broadcast
   }
-
 }

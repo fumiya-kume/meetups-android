@@ -6,9 +6,9 @@ import com.meetups.kuxu.meetup.domain.MeetupRepository
 import com.meetups.kuxu.meetup.ui.bindingModel.MeetupRowBindingModel
 import com.meetups.kuxu.meetup.ui.bindingModel.MeetupSearchBindingModel
 import com.meetups.kuxu.meetup.ui.bindingModel.meetupRowBindingModelConverter
-import kotlinx.coroutines.experimental.Dispatchers
-import kotlinx.coroutines.experimental.GlobalScope
-import kotlinx.coroutines.experimental.launch
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 internal class MeetupListLiveData(
   private val meetupRepository: MeetupRepository,
@@ -18,8 +18,7 @@ internal class MeetupListLiveData(
     super.onActive()
     GlobalScope.launch(Dispatchers.IO) {
       try {
-
-        val meetupList = meetupRepository.loadMeetupList().receive()
+        val meetupList = meetupRepository.loadMeetupList().await()!!
 
         launch(Dispatchers.Main) {
           value = meetupRowBindingModelConverter.convert(meetupList)
@@ -27,7 +26,7 @@ internal class MeetupListLiveData(
 
         val newList = meetupList.map {
           val locationDistance =
-            currentLocationService.distanceKmToCurrentLocation(it.meetupLocation).openSubscription().receive()
+            currentLocationService.distanceKmToCurrentLocation(it.meetupLocation).await()
           it.copy(distance = locationDistance)
         }
 
@@ -49,8 +48,7 @@ internal class MeetupListLiveData(
       try {
         val keyword = meetupSearchBindingModel.keyword
         GlobalScope.launch(Dispatchers.IO) {
-          val searchResult = meetupRepository.searchMeetupList(keyword)
-            .receive()
+          val searchResult = meetupRepository.searchMeetupList(keyword).await()!!
 
           launch(Dispatchers.Main) {
             value = meetupRowBindingModelConverter.convert(searchResult)
@@ -58,7 +56,7 @@ internal class MeetupListLiveData(
 
           val newList = searchResult.map {
             val locationDistance =
-              currentLocationService.distanceKmToCurrentLocation(it.meetupLocation).openSubscription().receive()
+              currentLocationService.distanceKmToCurrentLocation(it.meetupLocation).await()
             it.copy(distance = locationDistance)
           }
 

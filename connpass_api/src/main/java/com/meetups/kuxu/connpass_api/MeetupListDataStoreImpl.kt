@@ -3,18 +3,17 @@ package com.meetups.kuxu.connpass_api
 import awaitStringResponse
 import com.github.kittinunf.fuel.httpGet
 import com.meetups.kuxu.connpass_api.entity.EventJson
-import com.meetups.kuxu.connpass_api.entity.MeetupJson
 import com.squareup.moshi.JsonAdapter
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.Types
-import kotlinx.coroutines.experimental.GlobalScope
-import kotlinx.coroutines.experimental.channels.ReceiveChannel
-import kotlinx.coroutines.experimental.channels.produce
-import kotlinx.coroutines.experimental.runBlocking
+import kotlinx.coroutines.Deferred
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.async
+import kotlinx.coroutines.runBlocking
 import java.lang.reflect.Type
 
 internal class MeetupListDataStoreImpl : MeetupListDataStore {
-  override fun loadMeetupList(): ReceiveChannel<List<EventJson>> = GlobalScope.produce {
+  override fun loadMeetupList() = GlobalScope.async {
     runBlocking {
       "https://meetups-api.azurewebsites.net/events?count=100"
         .httpGet()
@@ -26,7 +25,7 @@ internal class MeetupListDataStoreImpl : MeetupListDataStore {
             val jsonAdapter: JsonAdapter<List<EventJson>> = Moshi.Builder().build().adapter(type)
             val result = jsonAdapter.fromJson(it)
             result?.let {
-              send(it)
+              return@runBlocking it
             }
           },
           failure = {
@@ -36,7 +35,7 @@ internal class MeetupListDataStoreImpl : MeetupListDataStore {
     }
   }
 
-  override fun searchMeetupList(keyword: String): ReceiveChannel<List<EventJson>> = GlobalScope.produce {
+  override fun searchMeetupList(keyword: String): Deferred<List<EventJson>?> = GlobalScope.async {
     runBlocking {
       "https://meetups-api.azurewebsites.net/search?keyword=${keyword}"
         .httpGet()
@@ -48,7 +47,7 @@ internal class MeetupListDataStoreImpl : MeetupListDataStore {
             val jsonAdapter: JsonAdapter<List<EventJson>> = Moshi.Builder().build().adapter(type)
             val result = jsonAdapter.fromJson(it)
             result?.let {
-              send(it)
+              return@runBlocking it
             }
           },
           failure = {
