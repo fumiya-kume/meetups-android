@@ -3,7 +3,7 @@ package com.meetups.kuxu.meetup.ui.main
 import androidx.lifecycle.LiveData
 import com.meetups.kuxu.meetup.domain.CurrentLocationService
 import com.meetups.kuxu.meetup.domain.MeetupRepository
-import com.meetups.kuxu.meetup.domain.SearchMeetupUsecase
+import com.meetups.kuxu.meetup.domain.LoadNearMeetupUsecase
 import com.meetups.kuxu.meetup.ui.bindingModel.MeetupRowBindingModel
 import com.meetups.kuxu.meetup.ui.bindingModel.MeetupSearchBindingModel
 import com.meetups.kuxu.meetup.ui.bindingModel.meetupRowBindingModelConverter
@@ -14,33 +14,12 @@ import kotlinx.coroutines.launch
 internal class MeetupListLiveData(
   private val meetupRepository: MeetupRepository,
   private val currentLocationService: CurrentLocationService,
-  private val searchMeetupUsecase: SearchMeetupUsecase
+  private val loadNearMeetupUsecase: LoadNearMeetupUsecase
 ) : LiveData<List<MeetupRowBindingModel>>() {
   override fun onActive() {
     super.onActive()
     GlobalScope.launch(Dispatchers.IO) {
-      try {
-        val meetupList = meetupRepository.loadMeetupList().await()!!
-
-        launch(Dispatchers.Main) {
-          value = meetupRowBindingModelConverter.convert(meetupList)
-        }
-
-        val newList = meetupList.map {
-          val locationDistance =
-            currentLocationService.distanceKmToCurrentLocation(it.meetupLocation).await()
-          it.copy(distance = locationDistance)
-        }
-
-        launch(Dispatchers.Main) {
-          value = meetupRowBindingModelConverter.convert(newList)
-        }
-
-      } catch (e: Exception) {
-        GlobalScope.launch(Dispatchers.Main) {
-          value = emptyList()
-        }
-      }
+      searchNearMeetup()
     }
   }
 
@@ -77,10 +56,16 @@ internal class MeetupListLiveData(
 
   fun searchNearMeetup() {
     GlobalScope.launch {
-      val searchResult = searchMeetupUsecase.execute().await()
-      launch(Dispatchers.Main) {
-        searchResult?.let {
-          value = meetupRowBindingModelConverter.convert(it)
+      try {
+        val searchResult = loadNearMeetupUsecase.execute().await()
+        launch(Dispatchers.Main) {
+          searchResult?.let {
+            value = meetupRowBindingModelConverter.convert(it)
+          }
+        }
+      } catch (e: java.lang.Exception) {
+        launch(Dispatchers.Main) {
+          value = emptyList()
         }
       }
     }
