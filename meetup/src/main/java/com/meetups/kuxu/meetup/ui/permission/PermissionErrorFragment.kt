@@ -9,9 +9,11 @@ import android.provider.Settings
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import com.meetups.kuxu.meetup.R
 import com.meetups.kuxu.meetup.databinding.FragmentPermissionErrorBinding
 
@@ -51,8 +53,14 @@ class PermissionErrorFragment : Fragment() {
       }
     }
 
+    binding.backToPageMaterialButton.setOnClickListener {
+      if (!findNavController().popBackStack()) {
+        val toast = Toast.makeText(context, "元の画面に戻るのに失敗しました。アプリを再起動してください", Toast.LENGTH_SHORT).show()
+      }
+    }
     return binding.root
   }
+
 
   private fun navigateSettingActivity() {
     val intent = Intent().apply {
