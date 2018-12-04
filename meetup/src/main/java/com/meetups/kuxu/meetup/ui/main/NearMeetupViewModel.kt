@@ -14,11 +14,16 @@ internal class NearMeetupViewModel(
   var meetupListLiveData = nearMeetupListLiveDataFactory.create()
 
   fun search(bindingModel: MeetupSearchBindingModel) {
-    meetupListLiveData.search(bindingModel)
+    if (bindingModel.nearSearch && bindingModel.keyword.isEmpty()
+    ) {
+      meetupListLiveData.searchNearMeetup()
+    } else {
+      meetupListLiveData.search(bindingModel)
+    }
   }
 
   fun showEventPage(bindingModel: MeetupRowBindingModel) {
-    if(bindingModel.meetupUrl.isEmpty()){
+    if (bindingModel.meetupUrl.isEmpty()) {
       return
     }
     connpassEventPageViewerService.showEventPage(bindingModel.meetupUrl)
