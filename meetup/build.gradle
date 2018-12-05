@@ -100,4 +100,11 @@ dependencies {
     // Firebase
     implementation 'com.google.firebase:firebase-core:16.0.5'
     implementation 'com.google.firebase:firebase-messaging:17.3.4'
+
+    // Room
+    def room_version = "2.1.0-alpha03"
+    implementation "androidx.room:room-runtime:$room_version"
+    annotationProcessor "androidx.room:room-compiler:$room_version"
+    implementation "androidx.room:room-coroutines:$room_version"
+    testImplementation "androidx.room:room-testing:$room_version"
 }
