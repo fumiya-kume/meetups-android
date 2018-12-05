@@ -1,13 +1,11 @@
-package com.meetups.kuxu.meetup.infra
+package com.meetups.kuxu.meetup.domain.repository
 
 import com.meetups.kuxu.connpass_api.MeetupListDataStore
-import com.meetups.kuxu.meetup.domain.MeetupRepository
 import com.meetups.kuxu.meetup.entity.LocationEntity
 import com.meetups.kuxu.meetup.entity.MeetupEntity
 import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.async
-import kotlinx.coroutines.channels.ReceiveChannel
 import kotlinx.coroutines.runBlocking
 
 internal class MeetupRepositoryImpl(

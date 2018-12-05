@@ -1,6 +1,6 @@
 package com.meetups.kuxu.meetup.domain.usecase
 
-import com.meetups.kuxu.meetup.domain.MeetupRepository
+import com.meetups.kuxu.meetup.domain.repository.MeetupRepository
 import com.meetups.kuxu.meetup.domain.service.CurrentLocationService
 import com.meetups.kuxu.meetup.entity.MeetupEntity
 import kotlinx.coroutines.Deferred
