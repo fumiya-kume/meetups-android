@@ -10,8 +10,8 @@ internal object MeetupEntityConverter {
       eventJson. event_url,
       Int.MAX_VALUE,
       LocationEntity(
-        eventJson.lat ?: 0.0,
-        eventJson.lon ?: 0.0
+        eventJson.lat,
+        eventJson.lon
       )
     )
 

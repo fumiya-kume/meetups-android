@@ -1,8 +1,7 @@
-package com.meetups.kuxu.meetup.domain
+package com.meetups.kuxu.meetup.domain.repository
 
 import com.meetups.kuxu.meetup.entity.MeetupEntity
 import kotlinx.coroutines.Deferred
-import kotlinx.coroutines.channels.ReceiveChannel
 
 internal interface MeetupRepository {
   fun loadMeetupList(): Deferred<List<MeetupEntity>?>

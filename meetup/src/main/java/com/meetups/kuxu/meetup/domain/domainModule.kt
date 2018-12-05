@@ -1,13 +1,16 @@
 package com.meetups.kuxu.meetup.domain
 
-import com.meetups.kuxu.meetup.infra.CurrentLocationServiceImpl
-import com.meetups.kuxu.meetup.infra.MeetupRepositoryImpl
-import com.meetups.kuxu.meetup.infra.SearchMeetupUsecaseImpl
+import com.meetups.kuxu.meetup.domain.repository.MeetupRepository
+import com.meetups.kuxu.meetup.domain.service.CurrentLocationService
+import com.meetups.kuxu.meetup.domain.service.CurrentLocationServiceImpl
+import com.meetups.kuxu.meetup.domain.usecase.LoadNearMeetupUsecase
+import com.meetups.kuxu.meetup.domain.usecase.LoadNearMeetupUsecaseImpl
+import com.meetups.kuxu.meetup.domain.repository.MeetupRepositoryImpl
 import org.koin.android.ext.koin.androidApplication
 import org.koin.dsl.module.module
 
 internal val domainModule = module {
   factory { MeetupRepositoryImpl(get()) as MeetupRepository }
   factory { CurrentLocationServiceImpl(androidApplication()) as CurrentLocationService }
-  factory { SearchMeetupUsecaseImpl(get(), get()) as SearchMeetupUsecase }
+  factory { LoadNearMeetupUsecaseImpl(get(), get()) as LoadNearMeetupUsecase }
 }
