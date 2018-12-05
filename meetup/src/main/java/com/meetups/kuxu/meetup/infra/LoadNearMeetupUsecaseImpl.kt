@@ -1,6 +1,6 @@
 package com.meetups.kuxu.meetup.infra
 
-import com.meetups.kuxu.meetup.domain.CurrentLocationService
+import com.meetups.kuxu.meetup.domain.service.CurrentLocationService
 import com.meetups.kuxu.meetup.domain.LoadNearMeetupUsecase
 import com.meetups.kuxu.meetup.domain.MeetupRepository
 import com.meetups.kuxu.meetup.entity.MeetupEntity
