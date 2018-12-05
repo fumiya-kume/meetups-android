@@ -5,5 +5,5 @@ import kotlinx.coroutines.Deferred
 
 internal interface CurrentLocationService {
   suspend fun loadCurrentLocation(): LocationEntity
-  fun distanceKmToCurrentLocation(locationEntity: LocationEntity): Deferred<Int>
+  fun distanceTo(locationEntity: LocationEntity): Deferred<Int>
 }

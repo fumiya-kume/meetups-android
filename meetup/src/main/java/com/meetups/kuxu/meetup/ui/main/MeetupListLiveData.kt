@@ -3,7 +3,7 @@ package com.meetups.kuxu.meetup.ui.main
 import androidx.lifecycle.LiveData
 import com.meetups.kuxu.meetup.domain.service.CurrentLocationService
 import com.meetups.kuxu.meetup.domain.MeetupRepository
-import com.meetups.kuxu.meetup.domain.LoadNearMeetupUsecase
+import com.meetups.kuxu.meetup.domain.usecase.LoadNearMeetupUsecase
 import com.meetups.kuxu.meetup.ui.bindingModel.MeetupRowBindingModel
 import com.meetups.kuxu.meetup.ui.bindingModel.MeetupSearchBindingModel
 import com.meetups.kuxu.meetup.ui.bindingModel.meetupRowBindingModelConverter
@@ -37,7 +37,7 @@ internal class MeetupListLiveData(
 
           val newList = searchResult.map {
             val locationDistance =
-              currentLocationService.distanceKmToCurrentLocation(it.meetupLocation).await()
+              currentLocationService.distanceTo(it.meetupLocation).await()
             it.copy(distance = locationDistance)
           }
 

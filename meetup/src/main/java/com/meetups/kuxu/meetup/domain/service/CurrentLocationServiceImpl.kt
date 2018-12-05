@@ -15,7 +15,7 @@ internal class CurrentLocationServiceImpl(
   private val context: Context
 ) : CurrentLocationService {
 
-  override fun distanceKmToCurrentLocation(locationEntity: LocationEntity) = GlobalScope.async {
+  override fun distanceTo(locationEntity: LocationEntity) = GlobalScope.async {
     runBlocking {
       val currentLocation = loadCurrentLocation()
       val resultList = FloatArray(3)

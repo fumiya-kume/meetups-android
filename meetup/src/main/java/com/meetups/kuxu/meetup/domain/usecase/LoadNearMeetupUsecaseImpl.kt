@@ -1,8 +1,7 @@
-package com.meetups.kuxu.meetup.infra
+package com.meetups.kuxu.meetup.domain.usecase
 
-import com.meetups.kuxu.meetup.domain.service.CurrentLocationService
-import com.meetups.kuxu.meetup.domain.LoadNearMeetupUsecase
 import com.meetups.kuxu.meetup.domain.MeetupRepository
+import com.meetups.kuxu.meetup.domain.service.CurrentLocationService
 import com.meetups.kuxu.meetup.entity.MeetupEntity
 import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.GlobalScope
@@ -18,7 +17,7 @@ internal class LoadNearMeetupUsecaseImpl(
       meetupRepository.loadMeetupList()
         .await()
         ?.let {
-          it.map { it.copy(distance = currentLocationService.distanceKmToCurrentLocation(it.meetupLocation).await()) }
+          it.map { it.copy(distance = currentLocationService.distanceTo(it.meetupLocation).await()) }
             .filter { it.distance < 100 }
         }
     }
