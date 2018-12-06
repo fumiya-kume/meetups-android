@@ -1,15 +1,15 @@
 package com.meetups.kuxu.meetup.ui.main
 
 import androidx.lifecycle.LiveData
-import com.meetups.kuxu.meetup.domain.service.CurrentLocationService
 import com.meetups.kuxu.meetup.domain.repository.MeetupRepository
+import com.meetups.kuxu.meetup.domain.service.CurrentLocationService
 import com.meetups.kuxu.meetup.domain.usecase.LoadNearMeetupUsecase
 import com.meetups.kuxu.meetup.ui.bindingModel.MeetupRowBindingModel
 import com.meetups.kuxu.meetup.ui.bindingModel.MeetupSearchBindingModel
 import com.meetups.kuxu.meetup.ui.bindingModel.meetupRowBindingModelConverter
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
+import kotlinx.coroutines.channels.consumeEach
+import kotlinx.coroutines.channels.mapNotNull
 
 internal class MeetupListLiveData(
   private val meetupRepository: MeetupRepository,
@@ -53,16 +53,18 @@ internal class MeetupListLiveData(
     }
   }
 
-
+  @ExperimentalCoroutinesApi
   fun searchNearMeetup() {
     GlobalScope.launch {
       try {
-        val searchResult = loadNearMeetupUsecase.execute().await()
-        launch(Dispatchers.Main) {
-          searchResult?.let {
-            value = meetupRowBindingModelConverter.convert(it)
+        loadNearMeetupUsecase.execute()
+          .consumeEach {
+            launch(Dispatchers.Main) {
+              it.let {
+                value = meetupRowBindingModelConverter.convert(it)
+              }
+            }
           }
-        }
       } catch (e: java.lang.Exception) {
         launch(Dispatchers.Main) {
           value = emptyList()
