@@ -111,4 +111,5 @@ dependencies {
     testImplementation "com.nhaarman.mockitokotlin2:mockito-kotlin:2.0.0"
 
     androidTestImplementation "androidx.test.ext:junit:1.0.0"
+    androidTestImplementation 'io.kotlintest:kotlintest:2.0.7'
 }
