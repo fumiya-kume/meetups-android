@@ -23,9 +23,30 @@ internal class MeetupDaoTests : FeatureSpec() {
   }
 
   init {
-
     feature("データベースに書き込みをすることができる") {
       scenario("最初は何も書き込まれていない") {
+        dao.readAll().count().shouldBe(0)
+      }
+      scenario("アイテムを一つ書き込む") {
+        val meetupRoomEntity = MeetupRoomEntity()
+        dao.insert(meetupRoomEntity)
+        dao.readAll().count().shouldBe(1)
+      }
+    }
+    feature("データベースからアイテムを一つ消去することができる") {
+      scenario("データベースからアイテムを一つ消去するとデータベースが空になる") {
+        val meetupRoomEntity = MeetupRoomEntity()
+        dao.insert(meetupRoomEntity)
+        dao.readAll().count().shouldBe(1)
+        dao.deleteAll()
+        dao.readAll().count().shouldBe(0)
+      }
+
+      scenario("データベースからアイテムを消去するとデータベースが空になる") {
+        val meetupRoomEntityList = (1..10).map { MeetupRoomEntity(id = it) }
+        meetupRoomEntityList.forEach { item -> dao.insert(item) }
+        dao.readAll().count().shouldBe(meetupRoomEntityList.count())
+        dao.deleteAll()
         dao.readAll().count().shouldBe(0)
       }
     }
