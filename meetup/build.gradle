@@ -107,4 +107,7 @@ dependencies {
     annotationProcessor "androidx.room:room-compiler:$room_version"
     implementation "androidx.room:room-coroutines:$room_version"
     testImplementation "androidx.room:room-testing:$room_version"
+
+    // mockito-kotlin
+    testImplementation "com.nhaarman.mockitokotlin2:mockito-kotlin:2.0.0"
 }
