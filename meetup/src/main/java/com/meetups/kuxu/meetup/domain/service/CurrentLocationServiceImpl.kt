@@ -7,7 +7,6 @@ import com.google.android.gms.location.FusedLocationProviderClient
 import com.meetups.kuxu.meetup.entity.LocationEntity
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.async
-import kotlinx.coroutines.runBlocking
 import kotlin.coroutines.resume
 import kotlin.coroutines.suspendCoroutine
 
@@ -16,36 +15,30 @@ internal class CurrentLocationServiceImpl(
 ) : CurrentLocationService {
 
   override fun distanceTo(locationEntity: LocationEntity) = GlobalScope.async {
-    runBlocking {
-      val currentLocation = loadCurrentLocation()
-      val resultList = FloatArray(3)
-      Location.distanceBetween(
-        currentLocation.lat,
-        currentLocation.lon,
-        locationEntity.lat,
-        locationEntity.lon,
-        resultList
-      )
-      val km = (resultList[0] / 1000).toInt()
-      return@runBlocking km
-    }
+    val currentLocation = loadCurrentLocation()
+    val resultList = FloatArray(3)
+    Location.distanceBetween(
+      currentLocation.lat,
+      currentLocation.lon,
+      locationEntity.lat,
+      locationEntity.lon,
+      resultList
+    )
+    val km = (resultList[0] / 1000).toInt()
+    return@async km
   }
 
   @SuppressLint("MissingPermission")
   override suspend fun loadCurrentLocation() = suspendCoroutine<LocationEntity> { cont ->
-    try {
-      val locationProviderClient = FusedLocationProviderClient(context)
-      val lastLocation = locationProviderClient.lastLocation
-      lastLocation.addOnSuccessListener {
-        cont.resume(
-          LocationEntity(
-            it.latitude,
-            it.longitude
-          )
+    val locationProviderClient = FusedLocationProviderClient(context)
+    val lastLocation = locationProviderClient.lastLocation
+    lastLocation.addOnSuccessListener {
+      cont.resume(
+        LocationEntity(
+          it.latitude,
+          it.longitude
         )
-      }
-    } catch (e: Exception) {
-      throw e
+      )
     }
   }
 }
