@@ -6,6 +6,7 @@ import com.meetups.kuxu.meetup.ui.bindingModel.MeetupRowBindingModel
 import com.meetups.kuxu.meetup.ui.main.MeetupListLiveData
 import com.meetups.kuxu.meetup.ui.main.MeetupListLiveDataFactory
 import com.meetups.kuxu.meetup.ui.main.NearMeetupViewModel
+import com.nhaarman.mockitokotlin2.mock
 import org.jetbrains.spek.api.dsl.given
 import org.jetbrains.spek.api.dsl.it
 import org.jetbrains.spek.api.dsl.on
@@ -19,17 +20,9 @@ import org.mockito.Mockito.times
 @RunWith(JUnitPlatform::class)
 internal class NearMeetupViewModelTest : SubjectSpek<NearMeetupViewModel>({
 
-  val meetupListLiveDataFactory: MeetupListLiveDataFactory by lazy {
-    Mockito.mock(MeetupListLiveDataFactory::class.java)
-  }
-
-  val meetupListLiveData: MeetupListLiveData by lazy {
-    Mockito.mock(MeetupListLiveData::class.java)
-  }
-
-  val connpassEventPageViewerService: ConnpassEventPageViewerService by lazy {
-    Mockito.mock(ConnpassEventPageViewerService::class.java)
-  }
+  val meetupListLiveDataFactory = mock<MeetupListLiveDataFactory>()
+  val meetupListLiveData = mock<MeetupListLiveData>()
+  val connpassEventPageViewerService = mock<ConnpassEventPageViewerService>()
 
   val application: Application by lazy {
     Mockito.mock(Application::class.java)
