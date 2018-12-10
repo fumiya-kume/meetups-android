@@ -1,6 +1,7 @@
 package com.meetups.kuxu.meetup.ui
 
 import android.app.Application
+import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.meetups.kuxu.meetup.domain.service.ConnpassEventPageViewerService
 import com.meetups.kuxu.meetup.ui.bindingModel.MeetupRowBindingModel
 import com.meetups.kuxu.meetup.ui.main.MeetupListLiveData
@@ -17,7 +18,7 @@ import org.mockito.Mockito
 import org.mockito.Mockito.`when`
 import org.mockito.Mockito.times
 
-@RunWith(JUnitPlatform::class)
+@RunWith(AndroidJUnit4::class)
 internal class NearMeetupViewModelTest : SubjectSpek<NearMeetupViewModel>({
 
   val meetupListLiveDataFactory = mock<MeetupListLiveDataFactory>()
