@@ -7,9 +7,11 @@ import com.meetups.kuxu.meetup.domain.usecase.LoadNearMeetupUsecase
 import com.meetups.kuxu.meetup.ui.bindingModel.MeetupRowBindingModel
 import com.meetups.kuxu.meetup.ui.bindingModel.MeetupSearchBindingModel
 import com.meetups.kuxu.meetup.ui.bindingModel.meetupRowBindingModelConverter
-import kotlinx.coroutines.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.channels.consumeEach
-import kotlinx.coroutines.channels.mapNotNull
+import kotlinx.coroutines.launch
 
 internal class MeetupListLiveData(
   private val meetupRepository: MeetupRepository,
@@ -23,7 +25,10 @@ internal class MeetupListLiveData(
     }
   }
 
-  fun search(meetupSearchBindingModel: MeetupSearchBindingModel) {
+  fun search(
+    meetupSearchBindingModel: MeetupSearchBindingModel,
+    onError: (String) -> Unit
+  ) {
     GlobalScope.launch {
 
       try {
@@ -48,6 +53,7 @@ internal class MeetupListLiveData(
       } catch (e: Exception) {
         launch(Dispatchers.Main) {
           value = emptyList()
+          onError("Error on search")
         }
       }
     }

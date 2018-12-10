@@ -1,7 +1,7 @@
 package com.meetups.kuxu.meetup.ui
 
 import android.app.Application
-import com.meetups.kuxu.meetup.service.ConnpassEventPageViewerService
+import com.meetups.kuxu.meetup.domain.service.ConnpassEventPageViewerService
 import com.meetups.kuxu.meetup.ui.bindingModel.MeetupRowBindingModel
 import com.meetups.kuxu.meetup.ui.main.MeetupListLiveData
 import com.meetups.kuxu.meetup.ui.main.MeetupListLiveDataFactory
