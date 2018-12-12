@@ -1,11 +1,13 @@
 package com.meetups.kuxu.meetup.ui
 
 import android.app.Application
-import com.meetups.kuxu.meetup.service.ConnpassEventPageViewerService
+import com.meetups.kuxu.meetup.domain.service.ConnpassEventPageViewerService
 import com.meetups.kuxu.meetup.ui.bindingModel.MeetupRowBindingModel
 import com.meetups.kuxu.meetup.ui.main.MeetupListLiveData
 import com.meetups.kuxu.meetup.ui.main.MeetupListLiveDataFactory
 import com.meetups.kuxu.meetup.ui.main.NearMeetupViewModel
+import com.nhaarman.mockitokotlin2.doReturn
+import com.nhaarman.mockitokotlin2.mock
 import org.jetbrains.spek.api.dsl.given
 import org.jetbrains.spek.api.dsl.it
 import org.jetbrains.spek.api.dsl.on
@@ -13,30 +15,19 @@ import org.jetbrains.spek.subject.SubjectSpek
 import org.junit.platform.runner.JUnitPlatform
 import org.junit.runner.RunWith
 import org.mockito.Mockito
-import org.mockito.Mockito.`when`
 import org.mockito.Mockito.times
 
 @RunWith(JUnitPlatform::class)
 internal class NearMeetupViewModelTest : SubjectSpek<NearMeetupViewModel>({
 
-  val meetupListLiveDataFactory: MeetupListLiveDataFactory by lazy {
-    Mockito.mock(MeetupListLiveDataFactory::class.java)
+  val meetupListLiveData = mock<MeetupListLiveData>()
+  val meetupListLiveDataFactory = mock<MeetupListLiveDataFactory> {
+    on { create() } doReturn meetupListLiveData
   }
-
-  val meetupListLiveData: MeetupListLiveData by lazy {
-    Mockito.mock(MeetupListLiveData::class.java)
-  }
-
-  val connpassEventPageViewerService: ConnpassEventPageViewerService by lazy {
-    Mockito.mock(ConnpassEventPageViewerService::class.java)
-  }
+  val connpassEventPageViewerService = mock<ConnpassEventPageViewerService>()
 
   val application: Application by lazy {
     Mockito.mock(Application::class.java)
-  }
-
-  beforeGroup {
-    `when`(meetupListLiveDataFactory.create()).thenReturn(meetupListLiveData)
   }
 
   subject {

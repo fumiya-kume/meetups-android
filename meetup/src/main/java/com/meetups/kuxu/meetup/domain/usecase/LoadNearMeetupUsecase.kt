@@ -1,8 +1,8 @@
 package com.meetups.kuxu.meetup.domain.usecase
 
 import com.meetups.kuxu.meetup.entity.MeetupEntity
-import kotlinx.coroutines.Deferred
+import kotlinx.coroutines.channels.ReceiveChannel
 
 internal interface LoadNearMeetupUsecase {
-  fun execute(): Deferred<List<MeetupEntity>?>
+  fun execute(): ReceiveChannel<List<MeetupEntity>>
 }

@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.core.content.PermissionChecker
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
+import com.meetups.kuxu.connpass_api.connpassApiModule
 import com.meetups.kuxu.meetup.R
 import com.meetups.kuxu.meetup.databinding.FragmentNearMeetupOverviewBinding
 import com.meetups.kuxu.meetup.ui.bindingModel.MeetupRowBindingModel
@@ -15,12 +16,19 @@ import com.meetups.kuxu.meetup.ui.bindingModel.MeetupSearchBindingModel
 import com.meetups.kuxu.meetup.ui.dialog.MeetupSearchBottomSheetFragment
 import com.meetups.kuxu.meetup.ui.dialog.OnSearchMeetupClickListener
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import org.koin.standalone.StandAloneContext.loadKoinModules
 
 /**
  * A simple [Fragment] subclass.
  *
  */
 class NearMeetupOverviewFragment : Fragment() {
+  override fun onCreate(savedInstanceState: Bundle?) {
+    super.onCreate(savedInstanceState)
+
+    loadKoinModules(connpassApiModule)
+  }
+
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
 

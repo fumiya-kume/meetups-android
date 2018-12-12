@@ -1,20 +1,16 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
 
 android {
     compileSdkVersion 28
-
-
 
     defaultConfig {
         minSdkVersion 21
         targetSdkVersion 28
         versionCode 1
         versionName "1.0"
-
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-
     }
 
     buildTypes {
@@ -104,7 +100,16 @@ dependencies {
     // Room
     def room_version = "2.1.0-alpha03"
     implementation "androidx.room:room-runtime:$room_version"
-    annotationProcessor "androidx.room:room-compiler:$room_version"
+    kapt "androidx.room:room-compiler:$room_version"
     implementation "androidx.room:room-coroutines:$room_version"
     testImplementation "androidx.room:room-testing:$room_version"
+
+    // mockito-kotlin
+    testImplementation "com.nhaarman.mockitokotlin2:mockito-kotlin:2.0.0"
+
+    testImplementation "androidx.test:core:1.0.0"
+    testImplementation "androidx.test.ext:junit:1.0.0"
+
+    androidTestImplementation "androidx.test.ext:junit:1.0.0"
+    androidTestImplementation 'io.kotlintest:kotlintest:2.0.7'
 }

@@ -2,23 +2,48 @@ package com.meetups.kuxu.meetup.domain.usecase
 
 import com.meetups.kuxu.meetup.domain.repository.MeetupRepository
 import com.meetups.kuxu.meetup.domain.service.CurrentLocationService
+import com.meetups.kuxu.meetup.domain.usecase.room.MeetupDao
+import com.meetups.kuxu.meetup.domain.usecase.room.MeetupRoomEntity
 import com.meetups.kuxu.meetup.entity.MeetupEntity
-import kotlinx.coroutines.Deferred
+import com.meetups.kuxu.meetup.entity.MeetupEntityConverter
 import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.async
+import kotlinx.coroutines.channels.ReceiveChannel
+import kotlinx.coroutines.channels.produce
 import kotlinx.coroutines.runBlocking
 
 internal class LoadNearMeetupUsecaseImpl(
   private val meetupRepository: MeetupRepository,
-  private val currentLocationService: CurrentLocationService
+  private val currentLocationService: CurrentLocationService,
+  private val meetupDao: MeetupDao
 ) : LoadNearMeetupUsecase {
-  override fun execute(): Deferred<List<MeetupEntity>?> = GlobalScope.async {
+  override fun execute(): ReceiveChannel<List<MeetupEntity>> = GlobalScope.produce {
     runBlocking {
+      val readResult =
+        meetupDao.readAll()
+          .map { MeetupEntityConverter.convert(it) }
+          .map { it.copy(distance = currentLocationService.distanceTo(it.meetupLocation).await()) }
+      send(readResult)
+
       meetupRepository.loadMeetupList()
         .await()
         ?.let {
-          it.map { it.copy(distance = currentLocationService.distanceTo(it.meetupLocation).await()) }
-            .filter { it.distance < 100 }
+          meetupDao.deleteAll()
+          it
+            .map {
+              MeetupRoomEntity(
+                id = it.id,
+                title = it.title,
+                meetupLink = it.meetupLink,
+                lat = it.meetupLocation.lat,
+                lon = it.meetupLocation.lon
+              )
+            }
+            .map { meetupDao.insert(it) }
+
+          val resultList =
+            it.map { it.copy(distance = currentLocationService.distanceTo(it.meetupLocation).await()) }
+              .filter { it.distance < 100 }
+          send(resultList)
         }
     }
   }
