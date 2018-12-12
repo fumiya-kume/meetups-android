@@ -1,7 +1,6 @@
 package com.meetups.kuxu.meetup.ui
 
 import android.app.Application
-import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.meetups.kuxu.meetup.domain.service.ConnpassEventPageViewerService
 import com.meetups.kuxu.meetup.ui.bindingModel.MeetupRowBindingModel
 import com.meetups.kuxu.meetup.ui.main.MeetupListLiveData
@@ -13,11 +12,12 @@ import org.jetbrains.spek.api.dsl.given
 import org.jetbrains.spek.api.dsl.it
 import org.jetbrains.spek.api.dsl.on
 import org.jetbrains.spek.subject.SubjectSpek
+import org.junit.platform.runner.JUnitPlatform
 import org.junit.runner.RunWith
 import org.mockito.Mockito
 import org.mockito.Mockito.times
 
-@RunWith(AndroidJUnit4::class)
+@RunWith(JUnitPlatform::class)
 internal class NearMeetupViewModelTest : SubjectSpek<NearMeetupViewModel>({
 
   val meetupListLiveData = mock<MeetupListLiveData>()
