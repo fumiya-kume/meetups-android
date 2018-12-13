@@ -18,27 +18,30 @@ internal class LoadNearMeetupUsecaseImpl(
 ) : LoadNearMeetupUsecase {
   override fun execute(): ReceiveChannel<List<MeetupEntity>> = GlobalScope.produce {
     runBlocking {
-      val readResult =
+
+      send(
         meetupDao.readAll()
           .map { MeetupEntityConverter.convert(it) }
           .map { it.copy(distance = currentLocationService.distanceTo(it.meetupLocation).await()) }
-      send(readResult)
+      )
 
       meetupRepository.loadMeetupList()
         .await()
         ?.let {
           meetupDao.deleteAll()
-          it
-            .map {
-              MeetupRoomEntity(
-                id = it.id,
-                title = it.title,
-                meetupLink = it.meetupLink,
-                lat = it.meetupLocation.lat,
-                lon = it.meetupLocation.lon
-              )
-            }
-            .map { meetupDao.insert(it) }
+          meetupDao.insertAll(
+            it
+              .map {
+                MeetupRoomEntity(
+                  id = it.id,
+                  title = it.title,
+                  meetupLink = it.meetupLink,
+                  lat = it.meetupLocation.lat,
+                  lon = it.meetupLocation.lon
+                )
+              }
+          )
+
 
           val resultList =
             it.map { it.copy(distance = currentLocationService.distanceTo(it.meetupLocation).await()) }
