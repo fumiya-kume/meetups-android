@@ -64,7 +64,10 @@ class NearMeetupOverviewFragment : Fragment() {
     }
     binding.searchMeetupMaterialButton.setOnClickListener {
       val meetupSearchBottomSheetFragment = MeetupSearchBottomSheetFragment()
-      meetupSearchBottomSheetFragment.show(fragmentManager, meetupSearchBottomSheetFragment.tag)
+      fragmentManager?.let {
+        meetupSearchBottomSheetFragment.show(it, meetupSearchBottomSheetFragment.tag)
+      }
+
 
       meetupSearchBottomSheetFragment.searchMeetupClickListener = object :
         OnSearchMeetupClickListener {
