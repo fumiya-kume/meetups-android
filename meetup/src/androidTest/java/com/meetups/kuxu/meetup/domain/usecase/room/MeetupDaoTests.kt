@@ -29,14 +29,14 @@ internal class MeetupDaoTests : FeatureSpec() {
       }
       scenario("アイテムを一つ書き込む") {
         val meetupRoomEntity = MeetupRoomEntity()
-        dao.insert(meetupRoomEntity)
+        dao.insertAll(meetupRoomEntity)
         dao.readAll().count().shouldBe(1)
       }
     }
     feature("データベースからアイテムを一つ消去することができる") {
       scenario("データベースからアイテムを一つ消去するとデータベースが空になる") {
         val meetupRoomEntity = MeetupRoomEntity()
-        dao.insert(meetupRoomEntity)
+        dao.insertAll(meetupRoomEntity)
         dao.readAll().count().shouldBe(1)
         dao.deleteAll()
         dao.readAll().count().shouldBe(0)
@@ -44,7 +44,7 @@ internal class MeetupDaoTests : FeatureSpec() {
 
       scenario("データベースからアイテムを消去するとデータベースが空になる") {
         val meetupRoomEntityList = (1..10).map { MeetupRoomEntity(id = it) }
-        meetupRoomEntityList.forEach { item -> dao.insert(item) }
+        meetupRoomEntityList.forEach { item -> dao.insertAll(item) }
         dao.readAll().count().shouldBe(meetupRoomEntityList.count())
         dao.deleteAll()
         dao.readAll().count().shouldBe(0)

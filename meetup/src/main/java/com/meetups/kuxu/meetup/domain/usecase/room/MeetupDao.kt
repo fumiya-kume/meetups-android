@@ -8,7 +8,7 @@ import androidx.room.Query
 @Dao
 interface MeetupDao {
   @Insert(onConflict = OnConflictStrategy.REPLACE)
-  fun insert(roomEntity: MeetupRoomEntity)
+  fun insertAll(roomEntityList: List<MeetupRoomEntity>)
 
   @Query("select * from meetup")
   fun readAll(): List<MeetupRoomEntity>
