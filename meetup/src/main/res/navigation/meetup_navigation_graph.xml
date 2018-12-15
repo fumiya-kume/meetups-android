@@ -17,7 +17,10 @@
 	<fragment android:id="@+id/permissionErrorFragment"
 	          android:name="com.meetups.kuxu.meetup.ui.permission.PermissionErrorFragment"
 	          android:label="PermissionErrorFragment"
-	          tools:layout="@layout/fragment_permission_error"/>
+	          tools:layout="@layout/fragment_permission_error">
+		<action android:id="@+id/action_permissionErrorFragment_to_nearMeetupOverviewFragment"
+		        app:destination="@id/nearMeetupOverviewFragment"/>
+	</fragment>
 	<action android:id="@+id/action_global_nearMeetupOverviewFragment" app:destination="@id/nearMeetupOverviewFragment"/>
 	<action android:id="@+id/action_global_setting_graph" app:destination="@id/setting_graph"
 	        app:launchSingleTop="false"
