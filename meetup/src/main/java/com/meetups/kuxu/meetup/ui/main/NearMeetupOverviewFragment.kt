@@ -15,6 +15,7 @@ import com.meetups.kuxu.meetup.ui.bindingModel.MeetupRowBindingModel
 import com.meetups.kuxu.meetup.ui.bindingModel.MeetupSearchBindingModel
 import com.meetups.kuxu.meetup.ui.dialog.MeetupSearchBottomSheetFragment
 import com.meetups.kuxu.meetup.ui.dialog.OnSearchMeetupClickListener
+import kotlinx.android.synthetic.main.fragment_near_meetup_overview.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.standalone.StandAloneContext.loadKoinModules
 
@@ -27,10 +28,18 @@ class NearMeetupOverviewFragment : Fragment() {
     super.onCreate(savedInstanceState)
 
     loadKoinModules(connpassApiModule)
+
   }
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
+
+    bottom_app_bar.inflateMenu(R.menu.setting_menu)
+
+    bottom_app_bar.setOnMenuItemClickListener {
+      Navigation.findNavController(view).navigate(R.id.action_global_setting_graph)
+      true
+    }
 
     val canUseLocationPermission = PermissionChecker.checkSelfPermission(
       requireContext(),
