@@ -8,21 +8,40 @@ import android.view.ViewGroup
 import androidx.core.content.PermissionChecker
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
+import com.meetups.kuxu.connpass_api.connpassApiModule
 import com.meetups.kuxu.meetup.R
 import com.meetups.kuxu.meetup.databinding.FragmentNearMeetupOverviewBinding
 import com.meetups.kuxu.meetup.ui.bindingModel.MeetupRowBindingModel
 import com.meetups.kuxu.meetup.ui.bindingModel.MeetupSearchBindingModel
 import com.meetups.kuxu.meetup.ui.dialog.MeetupSearchBottomSheetFragment
 import com.meetups.kuxu.meetup.ui.dialog.OnSearchMeetupClickListener
+import kotlinx.android.synthetic.main.fragment_near_meetup_overview.*
+import org.koin.android.ext.android.getKoin
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import org.koin.standalone.StandAloneContext.loadKoinModules
 
 /**
  * A simple [Fragment] subclass.
  *
  */
 class NearMeetupOverviewFragment : Fragment() {
+  override fun onCreate(savedInstanceState: Bundle?) {
+    super.onCreate(savedInstanceState)
+
+    val scope = getKoin().createScope("Meetup")
+    loadKoinModules(connpassApiModule)
+    scope.close()
+  }
+
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
+
+    bottom_app_bar.inflateMenu(R.menu.setting_menu)
+
+    bottom_app_bar.setOnMenuItemClickListener {
+      Navigation.findNavController(view).navigate(R.id.action_global_setting_graph)
+      true
+    }
 
     val canUseLocationPermission = PermissionChecker.checkSelfPermission(
       requireContext(),
@@ -49,48 +68,6 @@ class NearMeetupOverviewFragment : Fragment() {
 
     val viewModel: NearMeetupViewModel by viewModel()
 
-//    binding.toolbar.inflateMenu(R.menu.event_overview_menu)
-//    binding.toolbar.setOnMenuItemClickListener {
-//      if (PermissionChecker.checkSelfPermission(
-//          requireContext(),
-//          Manifest.permission.ACCESS_FINE_LOCATION
-//        ) == PermissionChecker.PERMISSION_GRANTED
-//      ) {
-//        when (it.itemId) {
-//          R.id.near_search_item -> {
-//            viewModel.loadCurrentLocation(
-//              onError = {
-//                return@loadCurrentLocation
-//              })
-//          }
-//          R.id.seach_keyword_item -> {
-//            val meetupSearchBottomSheetFragment = MeetupSearchBottomSheetFragment()
-//            meetupSearchBottomSheetFragment.show(fragmentManager, meetupSearchBottomSheetFragment.tag)
-//
-//          }
-//          else -> {
-//            // 何もしない
-//          }
-//        }
-//
-//      } else {
-//        if (ActivityCompat.shouldShowRequestPermissionRationale(
-//            activity as Activity,
-//            Manifest.permission.ACCESS_FINE_LOCATION
-//          )
-//        ) {
-//          ActivityCompat.requestPermissions(
-//            activity as Activity,
-//            arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
-//            0
-//          )
-//        } else {
-//
-//        }
-//      }
-//      true
-//    }
-
     val adapter = MeetupRowAdapter(requireContext())
     binding.nearRowRecyclerView.adapter = adapter
     viewModel.meetupListLiveData.observeForever {
@@ -98,7 +75,10 @@ class NearMeetupOverviewFragment : Fragment() {
     }
     binding.searchMeetupMaterialButton.setOnClickListener {
       val meetupSearchBottomSheetFragment = MeetupSearchBottomSheetFragment()
-      meetupSearchBottomSheetFragment.show(fragmentManager, meetupSearchBottomSheetFragment.tag)
+      fragmentManager?.let {
+        meetupSearchBottomSheetFragment.show(it, meetupSearchBottomSheetFragment.tag)
+      }
+
 
       meetupSearchBottomSheetFragment.searchMeetupClickListener = object :
         OnSearchMeetupClickListener {

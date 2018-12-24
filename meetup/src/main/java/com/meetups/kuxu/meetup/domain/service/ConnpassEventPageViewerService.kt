@@ -1,4 +1,4 @@
-package com.meetups.kuxu.meetup.service
+package com.meetups.kuxu.meetup.domain.service
 
 internal interface ConnpassEventPageViewerService {
   fun showEventPage(eventPageUrl: String) {

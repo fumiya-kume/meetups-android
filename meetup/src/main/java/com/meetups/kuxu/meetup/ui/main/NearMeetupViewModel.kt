@@ -2,7 +2,8 @@ package com.meetups.kuxu.meetup.ui.main
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
-import com.meetups.kuxu.meetup.service.ConnpassEventPageViewerService
+import androidx.lifecycle.MutableLiveData
+import com.meetups.kuxu.meetup.domain.service.ConnpassEventPageViewerService
 import com.meetups.kuxu.meetup.ui.bindingModel.MeetupRowBindingModel
 import com.meetups.kuxu.meetup.ui.bindingModel.MeetupSearchBindingModel
 
@@ -12,13 +13,23 @@ internal class NearMeetupViewModel(
   application: Application
 ) : AndroidViewModel(application) {
   var meetupListLiveData = nearMeetupListLiveDataFactory.create()
+  val errorMessageLiveData = MutableLiveData<String>()
 
   fun search(bindingModel: MeetupSearchBindingModel) {
-    meetupListLiveData.search(bindingModel)
+    if (bindingModel.nearSearch && bindingModel.keyword.isEmpty()
+    ) {
+      meetupListLiveData.searchNearMeetup()
+    } else {
+      meetupListLiveData.search(
+        bindingModel
+      ) {
+        errorMessageLiveData.postValue(it)
+      }
+    }
   }
 
   fun showEventPage(bindingModel: MeetupRowBindingModel) {
-    if(bindingModel.meetupUrl.isEmpty()){
+    if (bindingModel.meetupUrl.isEmpty()) {
       return
     }
     connpassEventPageViewerService.showEventPage(bindingModel.meetupUrl)

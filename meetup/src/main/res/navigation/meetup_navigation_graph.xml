@@ -1,18 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:app="http://schemas.android.com/apk/res-auto"
-            xmlns:tools="http://schemas.android.com/tools" android:id="@+id/meetup_navigation_graph"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:id="@+id/meetup_navigation_graph"
             app:startDestination="@id/nearMeetupOverviewFragment">
 
-    <fragment android:id="@+id/nearMeetupOverviewFragment"
-              android:name="com.meetups.kuxu.meetup.ui.main.NearMeetupOverviewFragment"
-              android:label="fragment_near_meetup_overview"
-              tools:layout="@layout/fragment_near_meetup_overview">
-        <action android:id="@+id/action_nearMeetupOverviewFragment_to_permissionErrorFragment"
-                app:destination="@id/permissionErrorFragment"/>
-    </fragment>
-    <fragment android:id="@+id/permissionErrorFragment"
-              android:name="com.meetups.kuxu.meetup.ui.permission.PermissionErrorFragment"
-              android:label="PermissionErrorFragment"
-              tools:layout="@layout/fragment_permission_error" />
+
+
+	<fragment android:id="@+id/nearMeetupOverviewFragment"
+	          android:name="com.meetups.kuxu.meetup.ui.main.NearMeetupOverviewFragment"
+	          android:label="fragment_near_meetup_overview"
+	          tools:layout="@layout/fragment_near_meetup_overview">
+		<action android:id="@+id/action_nearMeetupOverviewFragment_to_permissionErrorFragment"
+		        app:destination="@id/permissionErrorFragment" app:launchSingleTop="true"/>
+	</fragment>
+	<fragment android:id="@+id/permissionErrorFragment"
+	          android:name="com.meetups.kuxu.meetup.ui.permission.PermissionErrorFragment"
+	          android:label="PermissionErrorFragment"
+	          tools:layout="@layout/fragment_permission_error">
+		<action android:id="@+id/action_permissionErrorFragment_to_nearMeetupOverviewFragment"
+		        app:destination="@id/nearMeetupOverviewFragment"/>
+	</fragment>
+	<action android:id="@+id/action_global_nearMeetupOverviewFragment" app:destination="@id/nearMeetupOverviewFragment"/>
+	<action android:id="@+id/action_global_setting_graph" app:destination="@id/setting_graph"
+	        app:launchSingleTop="false"
+	/>
+
+	<include app:graph="@navigation/setting_graph"/>
 </navigation>
