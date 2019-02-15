@@ -1,1 +1,5 @@
-include(":app", ":base")
+include(
+    ":app",
+    ":base",
+    ":feature:overview"
+)
