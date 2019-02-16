@@ -2,16 +2,27 @@
 
 package dependencies
 
+import dependencies.Versions.kotlinVersion
+import dependencies.Versions.navigationVersion
+
 object Dep {
     object kotlin {
-        val stdLib = "org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.3.20"
-
+        val stdLib = "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${kotlinVersion}"
     }
+
+    val material = "com.google.android.material:material:1.0.0"
 
     object androidx {
         val constraintLayout = "androidx.constraintlayout:constraintlayout:1.1.3"
         val kotlinExtension = "androidx.core:core-ktx:1.1.0-alpha04"
         val appCompat = "androidx.appcompat:appcompat:1.0.0-beta01"
+
+        val navigationFragment = "android.arch.navigation:navigation-fragment:${navigationVersion}"
+        val navigationUi = "android.arch.navigation:navigation-ui:${navigationVersion}"
+        val navigationRuntimeKtx = "android.arch.navigation:navigation-runtime-ktx:${navigationVersion}"
+        val navigatiomCommonKtx = "android.arch.navigation:navigation-common-ktx:${navigationVersion}"
+        val navigationFragmentKtx = "android.arch.navigation:navigation-fragment-ktx:${navigationVersion}"
+        val navigationUiKtx = "android.arch.navigation:navigation-ui-ktx:${navigationVersion}"
     }
 
     object test {

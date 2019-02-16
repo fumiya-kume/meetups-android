@@ -3,6 +3,7 @@ import dependencies.Dep
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: "androidx.navigation.safeargs"
 
 android {
     compileSdkVersion 28
@@ -20,15 +21,31 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+    dataBinding {
+        enabled = true
+    }
 }
 
 dependencies {
+    implementation project(":feature:overview")
+
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation Dep.kotlin.stdLib
     implementation Dep.androidx.appCompat
     implementation Dep.androidx.kotlinExtension
     implementation Dep.androidx.constraintLayout
+    implementation Dep.material
+
+    // navigation Architecture Component
+    implementation Dep.androidx.navigationFragment
+    implementation Dep.androidx.navigationUi
+    implementation Dep.androidx.navigationRuntimeKtx
+    implementation Dep.androidx.navigatiomCommonKtx
+    implementation Dep.androidx.navigationFragmentKtx
+    implementation Dep.androidx.navigationUiKtx
+
     testImplementation Dep.test.junit
+
     androidTestImplementation Dep.androidTest.androidx.testRunner
     androidTestImplementation Dep.androidTest.androidx.espresso
 }
