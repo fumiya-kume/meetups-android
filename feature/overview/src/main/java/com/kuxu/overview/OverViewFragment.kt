@@ -8,6 +8,9 @@ import androidx.fragment.app.Fragment
 import com.kuxu.overview.databinding.FragmentOverViewBinding
 
 class OverViewFragment : Fragment() {
+
+    private lateinit var viewModel: OverViewFragmentViewModel
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -19,6 +22,10 @@ class OverViewFragment : Fragment() {
                 container,
                 false
             )
+
+        viewModel.configuredOverviewSettingLiveData.observeForever {
+            binding.isConfiguredsetting = it
+        }
 
         return binding.root
     }

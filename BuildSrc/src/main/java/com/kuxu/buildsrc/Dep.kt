@@ -2,12 +2,14 @@
 
 package dependencies
 
+import dependencies.Versions.coroutineVersion
 import dependencies.Versions.kotlinVersion
 import dependencies.Versions.navigationVersion
 
 object Dep {
     object kotlin {
         val stdLib = "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${kotlinVersion}"
+        val coroutine = "org.jetbrains.kotlinx:kotlinx-coroutines-android:${coroutineVersion}"
     }
 
     val material = "com.google.android.material:material:1.0.0"
