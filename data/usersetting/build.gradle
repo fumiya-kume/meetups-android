@@ -3,10 +3,13 @@ import dependencies.Dep
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
-apply plugin: "androidx.navigation.safeargs"
+apply plugin: 'kotlin-kapt'
+apply plugin: 'kotlinx-serialization'
 
 android {
     compileSdkVersion 28
+
+
 
     defaultConfig {
         minSdkVersion 21
@@ -24,21 +27,16 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
-    dataBinding {
-        enabled = true
-    }
+
 }
 
 dependencies {
-    implementation project(":data:usersetting")
-
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation Dep.kotlin.coroutine
     implementation Dep.kotlin.stdLib
-    implementation Dep.androidx.appCompat
-    implementation Dep.androidx.kotlinExtension
-    implementation Dep.androidx.constraintLayout
-    implementation Dep.material
+    implementation Dep.kotlin.coroutine
+    implementation Dep.kotlin.serializer
+    implementation Dep.kvsSchema
+    kapt Dep.kvsSchemaCompiler
 
     // Koin
     implementation Dep.koin.koinCore

@@ -1,5 +1,6 @@
 include(
     ":app",
     ":base",
-    ":feature:overview"
+    ":feature:overview",
+    ":data:usersetting"
 )

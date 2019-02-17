@@ -6,8 +6,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.kuxu.overview.databinding.FragmentOverViewBinding
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class OverViewFragment : Fragment() {
+
+    private val overViewFragmentViewModel: OverViewFragmentViewModel by viewModel()
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -19,6 +23,10 @@ class OverViewFragment : Fragment() {
                 container,
                 false
             )
+
+        overViewFragmentViewModel.configuredOverviewSettingLiveData.observeForever {
+            binding.isConfiguredsetting = it
+        }
 
         return binding.root
     }
