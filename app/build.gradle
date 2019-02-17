@@ -27,6 +27,7 @@ android {
 }
 
 dependencies {
+    implementation project(":data:usersetting")
     implementation project(":feature:overview")
 
     implementation fileTree(dir: 'libs', include: ['*.jar'])
@@ -43,6 +44,14 @@ dependencies {
     implementation Dep.androidx.navigatiomCommonKtx
     implementation Dep.androidx.navigationFragmentKtx
     implementation Dep.androidx.navigationUiKtx
+
+    // Koin
+    implementation Dep.koin.koinCore
+    implementation Dep.koin.koinCoreExt
+    implementation Dep.koin.koinTest
+    implementation Dep.koin.koinAndroid
+    implementation Dep.koin.koinAndroidScope
+    implementation Dep.koin.koinAndroidViewModel
 
     testImplementation Dep.test.junit
 

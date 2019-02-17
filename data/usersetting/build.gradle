@@ -36,9 +36,15 @@ dependencies {
     implementation Dep.kotlin.coroutine
     implementation Dep.kotlin.serializer
     implementation Dep.kvsSchema
-
-
     kapt Dep.kvsSchemaCompiler
+
+    // Koin
+    implementation Dep.koin.koinCore
+    implementation Dep.koin.koinCoreExt
+    implementation Dep.koin.koinTest
+    implementation Dep.koin.koinAndroid
+    implementation Dep.koin.koinAndroidScope
+    implementation Dep.koin.koinAndroidViewModel
 
     testImplementation Dep.test.junit
 

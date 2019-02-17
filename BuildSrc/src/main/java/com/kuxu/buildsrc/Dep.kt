@@ -3,6 +3,7 @@
 package dependencies
 
 import dependencies.Versions.coroutineVersion
+import dependencies.Versions.koinVersion
 import dependencies.Versions.kotlinSerializerVersion
 import dependencies.Versions.kotlinVersion
 import dependencies.Versions.kvsSchemaVersion
@@ -28,6 +29,15 @@ object Dep {
         val navigatiomCommonKtx = "android.arch.navigation:navigation-common-ktx:${navigationVersion}"
         val navigationFragmentKtx = "android.arch.navigation:navigation-fragment-ktx:${navigationVersion}"
         val navigationUiKtx = "android.arch.navigation:navigation-ui-ktx:${navigationVersion}"
+    }
+
+    object koin{
+        val koinCore = "org.koin:koin-core:${koinVersion}"
+        val koinCoreExt = "org.koin:koin-core-ext:${koinVersion}"
+        val koinTest = "org.koin:koin-test:${koinVersion}"
+        val koinAndroid = "org.koin:koin-android:${koinVersion}"
+        val koinAndroidScope = "org.koin:koin-androidx-scope:${koinVersion}"
+        val koinAndroidViewModel = "org.koin:koin-androidx-viewmodel:${koinVersion}"
     }
 
     val kvsSchema = "com.rejasupotaro:kvs-schema:${kvsSchemaVersion}"
