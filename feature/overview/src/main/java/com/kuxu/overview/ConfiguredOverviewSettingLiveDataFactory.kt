@@ -1,7 +1,11 @@
 package com.kuxu.overview
 
-internal class ConfiguredOverviewSettingLiveDataFactory(
+import com.kuxu.overview.domain.ConfiguredOverviewSettingRepository
 
+internal class ConfiguredOverviewSettingLiveDataFactory(
+    private val configuredOverviewSettingRepository: ConfiguredOverviewSettingRepository
 ) {
-    fun create() = ConfiguredOverviewSettingLiveData()
+    fun create() = ConfiguredOverviewSettingLiveData(
+        configuredOverviewSettingRepository
+    )
 }

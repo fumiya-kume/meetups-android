@@ -3,13 +3,16 @@
 package dependencies
 
 import dependencies.Versions.coroutineVersion
+import dependencies.Versions.kotlinSerializerVersion
 import dependencies.Versions.kotlinVersion
+import dependencies.Versions.kvsSchemaVersion
 import dependencies.Versions.navigationVersion
 
 object Dep {
     object kotlin {
         val stdLib = "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${kotlinVersion}"
         val coroutine = "org.jetbrains.kotlinx:kotlinx-coroutines-android:${coroutineVersion}"
+        val serializer = "org.jetbrains.kotlinx:kotlinx-serialization-runtime:${kotlinSerializerVersion}"
     }
 
     val material = "com.google.android.material:material:1.0.0"
@@ -26,6 +29,9 @@ object Dep {
         val navigationFragmentKtx = "android.arch.navigation:navigation-fragment-ktx:${navigationVersion}"
         val navigationUiKtx = "android.arch.navigation:navigation-ui-ktx:${navigationVersion}"
     }
+
+    val kvsSchema = "com.rejasupotaro:kvs-schema:${kvsSchemaVersion}"
+    val kvsSchemaCompiler = "com.rejasupotaro:kvs-schema-compiler:${kvsSchemaVersion}"
 
     object test {
         val junit = "junit:junit:4.12"
