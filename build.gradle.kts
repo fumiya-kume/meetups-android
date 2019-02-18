@@ -34,3 +34,16 @@ task(
         rootProject.buildDir
     )
 }
+
+task(
+    "assemble",
+    Assemble::class
+) {
+
+}
+
+task(
+    "testClasses"
+) {
+
+}

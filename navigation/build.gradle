@@ -8,6 +8,8 @@ apply plugin: "androidx.navigation.safeargs"
 android {
     compileSdkVersion 28
 
+
+
     defaultConfig {
         minSdkVersion 21
         targetSdkVersion 28
@@ -24,23 +26,10 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
-    dataBinding {
-        enabled = true
-    }
+
 }
 
 dependencies {
-    implementation project(":navigation")
-    implementation project(":data:usersetting")
-
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation Dep.kotlin.coroutine
-    implementation Dep.kotlin.stdLib
-    implementation Dep.androidx.appCompat
-    implementation Dep.androidx.kotlinExtension
-    implementation Dep.androidx.constraintLayout
-    implementation Dep.material
-
     // navigation Architecture Component
     implementation Dep.androidx.navigationFragment
     implementation Dep.androidx.navigationUi
@@ -48,17 +37,4 @@ dependencies {
     implementation Dep.androidx.navigatiomCommonKtx
     implementation Dep.androidx.navigationFragmentKtx
     implementation Dep.androidx.navigationUiKtx
-
-    // Koin
-    implementation Dep.koin.koinCore
-    implementation Dep.koin.koinCoreExt
-    implementation Dep.koin.koinTest
-    implementation Dep.koin.koinAndroid
-    implementation Dep.koin.koinAndroidScope
-    implementation Dep.koin.koinAndroidViewModel
-
-    testImplementation Dep.test.junit
-
-    androidTestImplementation Dep.androidTest.androidx.testRunner
-    androidTestImplementation Dep.androidTest.androidx.espresso
 }

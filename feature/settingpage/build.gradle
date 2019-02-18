@@ -8,6 +8,8 @@ apply plugin: "androidx.navigation.safeargs"
 android {
     compileSdkVersion 28
 
+
+
     defaultConfig {
         minSdkVersion 21
         targetSdkVersion 28
@@ -30,7 +32,6 @@ android {
 }
 
 dependencies {
-    implementation project(":navigation")
     implementation project(":data:usersetting")
 
     implementation fileTree(dir: 'libs', include: ['*.jar'])
@@ -40,14 +41,6 @@ dependencies {
     implementation Dep.androidx.kotlinExtension
     implementation Dep.androidx.constraintLayout
     implementation Dep.material
-
-    // navigation Architecture Component
-    implementation Dep.androidx.navigationFragment
-    implementation Dep.androidx.navigationUi
-    implementation Dep.androidx.navigationRuntimeKtx
-    implementation Dep.androidx.navigatiomCommonKtx
-    implementation Dep.androidx.navigationFragmentKtx
-    implementation Dep.androidx.navigationUiKtx
 
     // Koin
     implementation Dep.koin.koinCore

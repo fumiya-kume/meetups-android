@@ -27,8 +27,10 @@ android {
 }
 
 dependencies {
+    implementation project(":navigation")
     implementation project(":data:usersetting")
     implementation project(":feature:overview")
+    implementation project(":feature:settingpage")
 
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation Dep.kotlin.stdLib
