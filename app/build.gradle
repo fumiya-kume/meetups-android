@@ -28,6 +28,7 @@ android {
 
 dependencies {
     implementation project(":navigation")
+    implementation project(":data:config")
     implementation project(":data:usersetting")
     implementation project(":feature:overview")
     implementation project(":feature:settingpage")

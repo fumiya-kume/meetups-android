@@ -1,6 +1,8 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 
 buildscript {
+    var kotlin_version: String by extra
+    kotlin_version = "1.3.21"
     val kotlinVersion by extra { "1.3.20" }
     repositories {
         google()
@@ -14,6 +16,7 @@ buildscript {
         classpath("android.arch.navigation:navigation-safe-args-gradle-plugin:1.0.0-beta02")
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
+
     }
 }
 

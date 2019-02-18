@@ -1,5 +1,5 @@
 package com.kuxu.usersetting.entity
 
 data class PrefectureList(
-    val list: List<Prefecture>
+    val list: List<Int>
 )

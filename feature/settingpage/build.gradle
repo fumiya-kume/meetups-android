@@ -32,6 +32,8 @@ android {
 }
 
 dependencies {
+    implementation project(":data:config")
+    implementation project(":data:entity")
     implementation project(":data:usersetting")
 
     implementation fileTree(dir: 'libs', include: ['*.jar'])
@@ -41,6 +43,8 @@ dependencies {
     implementation Dep.androidx.kotlinExtension
     implementation Dep.androidx.constraintLayout
     implementation Dep.material
+
+    implementation Dep.androidx.preference
 
     // Koin
     implementation Dep.koin.koinCore

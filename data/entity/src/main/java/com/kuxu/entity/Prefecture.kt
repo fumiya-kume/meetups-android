@@ -1,9 +1,10 @@
-package com.kuxu.usersetting.entity
+package com.kuxu.entity
 
 import kotlinx.serialization.Serializable
 
 
 @Serializable
 data class Prefecture(
-    val id: Int
+    val id: Int,
+    val name: String
 )

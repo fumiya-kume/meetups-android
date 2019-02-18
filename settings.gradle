@@ -1,2 +1,2 @@
-include ':feature:settingpage', ':navigation'
+include ':feature:settingpage', ':navigation', ':data:config', ':data:entity'
 include ":app", ":data:usersetting", ":feature:overview"
