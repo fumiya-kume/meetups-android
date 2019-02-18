@@ -8,6 +8,7 @@ import dependencies.Versions.kotlinSerializerVersion
 import dependencies.Versions.kotlinVersion
 import dependencies.Versions.kvsSchemaVersion
 import dependencies.Versions.navigationVersion
+import dependencies.Versions.preferenceVersion
 
 object Dep {
     object kotlin {
@@ -29,9 +30,11 @@ object Dep {
         val navigatiomCommonKtx = "android.arch.navigation:navigation-common-ktx:${navigationVersion}"
         val navigationFragmentKtx = "android.arch.navigation:navigation-fragment-ktx:${navigationVersion}"
         val navigationUiKtx = "android.arch.navigation:navigation-ui-ktx:${navigationVersion}"
+
+        val preference = "androidx.preference:preference:${preferenceVersion}"
     }
 
-    object koin{
+    object koin {
         val koinCore = "org.koin:koin-core:${koinVersion}"
         val koinCoreExt = "org.koin:koin-core-ext:${koinVersion}"
         val koinTest = "org.koin:koin-test:${koinVersion}"

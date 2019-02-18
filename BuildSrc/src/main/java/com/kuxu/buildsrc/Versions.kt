@@ -7,4 +7,5 @@ object Versions {
     val navigationVersion = "1.0.0-beta02"
     val kvsSchemaVersion = "5.1.0"
     val koinVersion = "1.0.2"
+    val preferenceVersion = "1.0.0"
 }

@@ -31,7 +31,8 @@
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                android:layout_marginBottom="8dp" app:layout_constraintBottom_toTopOf="@+id/navigate_setting_material_button"
+                android:layout_marginBottom="8dp"
+                app:layout_constraintBottom_toTopOf="@+id/navigate_setting_material_button"
                 app:layout_constraintVertical_chainStyle="packed"/>
 
         <com.google.android.material.button.MaterialButton
@@ -40,6 +41,7 @@
                 android:layout_height="wrap_content"
                 style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                 android:text="設定画面"
+                android:visibility="@{isConfiguredsetting?View.GONE:View.VISIBLE}"
                 android:layout_marginBottom="8dp"
                 app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintStart_toStartOf="parent"
                 android:layout_marginStart="8dp" app:layout_constraintEnd_toEndOf="parent"
