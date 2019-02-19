@@ -1,4 +1,4 @@
-package com.kuxu.overview
+package com.kuxu.overview.ui
 
 import androidx.lifecycle.LiveData
 import com.kuxu.overview.domain.ConfiguredOverviewSettingRepository

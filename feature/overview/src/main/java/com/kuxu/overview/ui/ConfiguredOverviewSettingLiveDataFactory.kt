@@ -1,4 +1,4 @@
-package com.kuxu.overview
+package com.kuxu.overview.ui
 
 import com.kuxu.overview.domain.ConfiguredOverviewSettingRepository
 

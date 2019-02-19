@@ -8,7 +8,7 @@
 
     <fragment
             android:id="@+id/overViewFragment"
-            android:name="com.kuxu.overview.OverViewFragment"
+            android:name="com.kuxu.overview.ui.OverViewFragment"
             android:label="OverViewFragment"
             >
         <action android:id="@+id/action_overViewFragment_to_rootSettingFragment"
