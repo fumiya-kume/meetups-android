@@ -15,7 +15,6 @@ class OverViewFragment : Fragment() {
     private val overViewFragmentViewModel: OverViewFragmentViewModel by viewModel()
     private val navController: NavController by inject()
 
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -28,6 +27,15 @@ class OverViewFragment : Fragment() {
                 false
             )
 
+        binding.mainMenuToolBar.inflateMenu(R.menu.main)
+
+        binding.mainMenuToolBar.setOnMenuItemClickListener {
+            when (it.itemId) {
+                R.id.setting_menu -> navigateSettingPage()
+                else -> true
+            }
+        }
+
         binding.navigateSettingMaterialButton.setOnClickListener {
             navController.navigate(R.id.action_overViewFragment_to_rootSettingFragment)
         }
@@ -37,5 +45,10 @@ class OverViewFragment : Fragment() {
         }
 
         return binding.root
+    }
+
+    private fun navigateSettingPage(): Boolean {
+        navController.navigate(R.id.action_overViewFragment_to_rootSettingFragment)
+        return true
     }
 }
