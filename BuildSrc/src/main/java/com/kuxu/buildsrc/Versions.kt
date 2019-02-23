@@ -8,4 +8,5 @@ object Versions {
     val kvsSchemaVersion = "5.1.0"
     val koinVersion = "1.0.2"
     val preferenceVersion = "1.0.0"
+    val fuelVersion = "2.0.1"
 }
