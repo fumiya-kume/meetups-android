@@ -9,7 +9,6 @@ import kotlin.coroutines.resume
 import kotlin.coroutines.suspendCoroutine
 
 internal class ConnpassClientImpl private constructor() : ConnpassClient {
-
     // 将来的にlocalhost から取得することを強制できるようにするためにBuilder Pattern を導入している
     override fun builder(): ConnpassClient = ConnpassClientImpl()
 
@@ -48,9 +47,29 @@ internal class ConnpassClientImpl private constructor() : ConnpassClient {
         )
         return this
     }
+
+    override fun keyword(keyword: String): ConnpassClient {
+        queryList
+            .put(
+                ConnpassQueryKind.Keyword,
+                keyword
+            )
+        return this
+    }
+
+    override fun keywordOr(keyword: String): ConnpassClient {
+        queryList
+            .put(
+                ConnpassQueryKind.KeywordOr,
+                keyword
+            )
+        return this
+    }
 }
 
 internal enum class ConnpassQueryKind(val queryName: String) {
     HoldingDueYM("ym"),
-    HoldingDueYMD("ymd")
+    HoldingDueYMD("ymd"),
+    Keyword("keyword"),
+    KeywordOr("keyword_or")
 }
