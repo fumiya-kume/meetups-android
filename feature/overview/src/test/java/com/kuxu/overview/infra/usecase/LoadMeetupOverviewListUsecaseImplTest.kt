@@ -73,7 +73,7 @@ class LoadMeetupOverviewListUsecaseImplTest {
             meetupRepository
         )
 
-        loadMeetupOverviewListUsecase.execute()
+        val executeResult = loadMeetupOverviewListUsecase.execute()
 
         verify(exactly = 1) {
             runBlocking {
@@ -92,5 +92,7 @@ class LoadMeetupOverviewListUsecaseImplTest {
                 meetupRepository.searchMeetupByPrefectureList(prefectureList)
             }
         }
+
+        Assert.assertArrayEquals(meetupList.toTypedArray(), executeResult.toTypedArray())
     }
 }
