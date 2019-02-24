@@ -18,7 +18,7 @@ val overviewModule = module {
 
     // LiveData Factory
     factory { ConfiguredOverviewSettingLiveDataFactory(get()) }
-    factory { MeetupOverviewLiveDataFactory() }
+    factory { MeetupOverviewLiveDataFactory(get(), get()) }
 
     // Repository
     factory { ChoosePrefectureRepositoryImpl(get(), get()) as ChoosePrefectureRepository }
