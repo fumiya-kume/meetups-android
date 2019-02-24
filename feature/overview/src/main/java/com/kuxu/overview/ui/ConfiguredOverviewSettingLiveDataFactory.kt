@@ -1,15 +1,15 @@
 package com.kuxu.overview.ui
 
-import com.kuxu.overview.domain.ConfiguredOverviewSettingRepository
+import com.kuxu.overview.domain.ChoosePrefectureRepository
 import kotlin.coroutines.CoroutineContext
 
 internal class ConfiguredOverviewSettingLiveDataFactory(
-    private val configuredOverviewSettingRepository: ConfiguredOverviewSettingRepository
+    private val choosePrefectureRepository: ChoosePrefectureRepository
 ) {
     fun create(
         coroutineContext: CoroutineContext
     ) = ConfiguredOverviewSettingLiveData(
         coroutineContext,
-        configuredOverviewSettingRepository
+        choosePrefectureRepository
     )
 }

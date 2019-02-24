@@ -9,6 +9,9 @@ import androidx.navigation.NavController
 import com.kuxu.overview.R
 import com.kuxu.overview.databinding.FragmentOverViewBinding
 import org.koin.android.ext.android.inject
+import org.koin.androidx.scope.ext.android.bindScope
+import org.koin.androidx.scope.ext.android.createScope
+import org.koin.androidx.scope.ext.android.getScope
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class OverViewFragment : Fragment() {
@@ -21,6 +24,7 @@ class OverViewFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
         val binding =
             FragmentOverViewBinding.inflate(
                 inflater,

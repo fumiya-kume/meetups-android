@@ -32,6 +32,9 @@ android {
 dependencies {
     implementation project(":navigation")
     implementation project(":data:usersetting")
+    implementation project(":data:config")
+    implementation project(":data:entity")
+    implementation project(":data:api")
 
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation Dep.kotlin.coroutine
