@@ -40,7 +40,6 @@ dependencies {
     implementation Dep.kotlin.coroutine
 
     implementation Dep.fuel
-//    implementation Dep.fuelCoroutine
     implementation Dep.fuelKotlinxSerialization
 
     testImplementation Dep.test.junit

@@ -23,5 +23,5 @@ val overviewModule = module {
     // Repository
     factory { ChoosePrefectureRepositoryImpl(get(), get()) as ChoosePrefectureRepository }
     factory { LoadMeetupOverviewListUsecaseImpl(get(), get()) as LoadMeetupOverviewListUsecase }
-    factory { MeetupRepositoryImpl(get()) as MeetupRepository }
+    factory { MeetupRepositoryImpl() as MeetupRepository }
 }

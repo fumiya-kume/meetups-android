@@ -7,12 +7,11 @@ import com.kuxu.overview.entity.MeetupEntity
 import com.kuxu.overview.entity.Prefecture
 
 internal class MeetupRepositoryImpl(
-    private val connpassClient: ConnpassClient
 ) : MeetupRepository {
     override suspend fun searchMeetupByPrefectureList(
         prefectureList: List<Prefecture>
     ): List<MeetupEntity> {
-        return connpassClient.builder()
+        return ConnpassClient.builder()
             .request().eventList
             .filter { exitstPrefecture(it, prefectureList) }
             .map {
