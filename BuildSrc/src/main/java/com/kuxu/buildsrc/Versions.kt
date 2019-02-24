@@ -9,4 +9,5 @@ object Versions {
     val koinVersion = "1.0.2"
     val preferenceVersion = "1.0.0"
     val fuelVersion = "2.0.1"
+    val mokkVersion = "1.9.1"
 }

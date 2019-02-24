@@ -61,6 +61,7 @@ dependencies {
     implementation Dep.koin.koinAndroidViewModel
 
     testImplementation Dep.test.junit
+    testImplementation Dep.test.mokk
 
     androidTestImplementation Dep.androidTest.androidx.testRunner
     androidTestImplementation Dep.androidTest.androidx.espresso
