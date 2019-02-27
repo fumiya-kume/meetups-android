@@ -6,12 +6,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.kuxu.overview.R
 import com.kuxu.overview.databinding.FragmentOverViewBinding
 import org.koin.android.ext.android.inject
-import org.koin.androidx.scope.ext.android.bindScope
-import org.koin.androidx.scope.ext.android.createScope
-import org.koin.androidx.scope.ext.android.getScope
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class OverViewFragment : Fragment() {
@@ -43,6 +41,16 @@ class OverViewFragment : Fragment() {
 
         binding.navigateSettingMaterialButton.setOnClickListener {
             navController.navigate(R.id.action_overViewFragment_to_rootSettingFragment)
+        }
+
+        binding.overviewRecyclerView.layoutManager = LinearLayoutManager(requireContext())
+        val adapter = MeetupOverviewAdapter(requireContext())
+        binding.overviewRecyclerView.adapter = adapter
+
+        overViewFragmentViewModel.meetupOverviewLiveData.observeForever {
+            adapter.submitList(
+                it
+            )
         }
 
         overViewFragmentViewModel.configuredOverviewSettingLiveData.observeForever {

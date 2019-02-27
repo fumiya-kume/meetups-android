@@ -40,6 +40,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 tools:context=".ui.OverViewFragment"
+                android:visibility="@{isConfiguredsetting?View.GONE:View.VISIBLE}"
         >
 
             <androidx.appcompat.widget.AppCompatTextView
@@ -47,7 +48,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="設定画面から設定してちょ"
-                    android:visibility="@{isConfiguredsetting?View.GONE:View.VISIBLE}"
+
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -62,13 +63,17 @@
                     android:layout_height="wrap_content"
                     style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                     android:text="設定画面"
-                    android:visibility="@{isConfiguredsetting?View.GONE:View.VISIBLE}"
                     android:layout_marginBottom="8dp"
                     app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintStart_toStartOf="parent"
                     android:layout_marginStart="8dp" app:layout_constraintEnd_toEndOf="parent"
                     android:layout_marginEnd="8dp" tools:text="@tools:sample/lorem"
                     app:layout_constraintTop_toBottomOf="@+id/setting_alert_text_view"/>
-
         </androidx.constraintlayout.widget.ConstraintLayout>
+        <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/overview_recycler_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+        </androidx.recyclerview.widget.RecyclerView>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
