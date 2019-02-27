@@ -38,7 +38,9 @@ data class Event(
     val limit: Int = 0,
     @SerialName("event_type")
     val eventType: String,
-    val series: Series,
+    @SerialName("series")
+    @Optional
+    val series: Series = Series(0, "", ""),
     @Optional
     val address: String = "",
     @Optional

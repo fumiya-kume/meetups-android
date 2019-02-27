@@ -16,14 +16,25 @@ class ConnpassClient private constructor() {
 
     suspend fun request(): ConnpassAPIResponse = suspendCoroutine {
         val host = "https://connpass.com"
-        val path = "/about/api/?"
+        val path = "/api/v1/event/?"
         val query = queryString()
-        val response = Fuel.get(host + path + query).response().second
-        if (response.statusCode == 503) {
+        val requestUrl = host + path + query
+
+        val result =
+            Fuel
+                .get(requestUrl)
+                .header("User-Agent" to "android-meeetups")
+                .responseString()
+
+
+        if (result.second.statusCode == 503) {
             throw ServerMaintenanceException()
         }
+
+        val string = result.third.get()
+
         it.resume(
-            Json.parse(ConnpassAPIResponse.serializer(), response.responseMessage)
+            Json.parse(ConnpassAPIResponse.serializer(), result.third.get())
         )
     }
 
