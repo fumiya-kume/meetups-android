@@ -18,13 +18,13 @@ data class Event(
     val catch: String = "",
     @SerialName("description")
     @Optional
-    val description: String = "",
+    val description: String? = "",
     @SerialName("event_url")
     @Optional
     val eventUrl: String = "",
     @SerialName("hash_tag")
     @Optional
-    val hashTag: String = "",
+    val hashTag: String? = "",
     @SerialName("started_at")
     @Serializable(with = ConnpassDateSerializer::class)
     @Optional
@@ -35,29 +35,35 @@ data class Event(
     val endedAt: Date = Date(),
     @SerialName("limit")
     @Optional
-    val limit: Int = 0,
+    val limit: Int? = 0,
     @SerialName("event_type")
     val eventType: String,
     @SerialName("series")
     @Optional
-    val series: Series = Series(0, "", ""),
+    val series: Series? = Series(0, "", ""),
     @Optional
-    val address: String = "",
+    val address: String? = "",
     @Optional
-    val place: String = "",
-    val lat: Double,
-    val lon: Double,
+    val place: String? = "",
+    @Optional
+    val lat: Double? = 0.0,
+    @Optional
+    val lon: Double? = 0.0,
     @SerialName("owner_id")
-    val ownerId: Int,
+    @Optional
+    val ownerId: Int = 0,
     @SerialName("owner_nickname")
-    val ownerNickname: String,
+    @Optional
+    val ownerNickname: String? = "",
     @SerialName("owner_display_name")
     @Optional
-    val ownerDisplayName: String = "",
-    val accepted: Int,
-    val waiting: Int,
+    val ownerDisplayName: String? = "",
+    @Optional
+    val accepted: Int? = 0,
+    @Optional
+    val waiting: Int? = 0,
     @SerialName("updated_at")
     @Serializable(with = ConnpassDateSerializer::class)
     @Optional
-    val updatedAt: Date = Date()
+    val updatedAt: Date? = Date()
 )

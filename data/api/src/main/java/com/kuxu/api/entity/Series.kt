@@ -5,9 +5,10 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class Series(
-    val id: Int,
     @Optional
-    val title: String = "",
+    val id: Int = 0,
+    @Optional
+    val title: String? = "",
     @Optional
     val url: String = ""
 )

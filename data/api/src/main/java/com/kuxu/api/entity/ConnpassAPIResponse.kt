@@ -1,5 +1,6 @@
 package com.kuxu.api.entity
 
+import kotlinx.serialization.Optional
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -12,6 +13,7 @@ data class ConnpassAPIResponse(
     @SerialName("results_start")
     val searchStartPosition: Int,
     @SerialName("events")
-    val eventList: List<Event>
+    @Optional
+    val eventList: List<Event> = emptyList()
 )
 
