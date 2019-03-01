@@ -20,11 +20,12 @@ internal class MeetupRepositoryImpl(
                     it.title,
                     it.startedAt,
                     it.place,
-                    it.accepted,
-                    it.limit
+                    it.accepted ?: 0,
+                    it.limit ?: 0
                 )
             }
     }
 
-    private fun exitstPrefecture(event: Event, list: List<Prefecture>) = list.any { event.address.contains(it.name) }
+    private fun exitstPrefecture(event: Event, list: List<Prefecture>) =
+        list.any { event.address?.contains(it.name) ?: false }
 }

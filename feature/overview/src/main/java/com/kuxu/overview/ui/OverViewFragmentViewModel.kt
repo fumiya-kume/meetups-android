@@ -14,7 +14,11 @@ internal class OverViewFragmentViewModel(
     override val coroutineContext: CoroutineContext = Dispatchers.Main + job
 
     val configuredOverviewSettingLiveData = configuredOverviewSettingLiveDataFactory.create(coroutineContext)
-    val meetupOverviewLiveData = meetupOverviewLiveDataFactory.create(coroutineContext)
+    var meetupOverviewLiveData = meetupOverviewLiveDataFactory.create(coroutineContext)
+
+    fun refreshMeetupList() {
+        meetupOverviewLiveData = meetupOverviewLiveDataFactory.create(coroutineContext)
+    }
 
     override fun onCleared() {
         super.onCleared()

@@ -9,6 +9,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import kotlin.coroutines.CoroutineContext
 
 internal class MeetupOverviewLiveData(
@@ -23,10 +24,11 @@ internal class MeetupOverviewLiveData(
         launch(Dispatchers.IO) {
             if (choosePrefectureRepository.hasConfigured()) {
                 try {
-                    postValue(
-                        loadMeetupOverviewListUsecase.execute()
+                    withContext(Dispatchers.Main) {
+                        value = loadMeetupOverviewListUsecase.execute()
                             .convert()
-                    )
+
+                    }
                 } catch (e: Exception) {
                     postValue(
                         emptyList()

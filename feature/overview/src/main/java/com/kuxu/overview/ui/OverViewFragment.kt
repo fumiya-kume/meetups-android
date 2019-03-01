@@ -17,6 +17,12 @@ class OverViewFragment : Fragment() {
     private val overViewFragmentViewModel: OverViewFragmentViewModel by viewModel()
     private val navController: NavController by inject()
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        overViewFragmentViewModel.refreshMeetupList()
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -43,7 +49,6 @@ class OverViewFragment : Fragment() {
             navController.navigate(R.id.action_overViewFragment_to_rootSettingFragment)
         }
 
-        binding.overviewRecyclerView.layoutManager = LinearLayoutManager(requireContext())
         val adapter = MeetupOverviewAdapter(requireContext())
         binding.overviewRecyclerView.adapter = adapter
 
