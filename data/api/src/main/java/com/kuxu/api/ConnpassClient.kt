@@ -15,7 +15,7 @@ class ConnpassClient private constructor() {
     }
 
     suspend fun request(): ConnpassAPIResponse = suspendCoroutine {
-        
+
         val host = "https://connpass.com"
         val path = "/api/v1/event/?count=100&"
         val query = queryString()
