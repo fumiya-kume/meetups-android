@@ -28,6 +28,8 @@ internal class MeetupOverviewAdapter(
             }
     }
 
+    var onOverviewMeetupEventItemClicked: OnOverviewMeetupEventItemClicked? = null
+
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
@@ -41,7 +43,10 @@ internal class MeetupOverviewAdapter(
         holder: MeetupOverviewViewHolder,
         position: Int
     ) {
-        holder.bind(getItem(position))
+        holder.bind(
+            getItem(position),
+            onOverviewMeetupEventItemClicked
+        )
     }
 
 
