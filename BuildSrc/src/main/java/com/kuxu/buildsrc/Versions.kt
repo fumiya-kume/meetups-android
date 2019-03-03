@@ -10,4 +10,5 @@ object Versions {
     val preferenceVersion = "1.0.0"
     val fuelVersion = "2.0.1"
     val mokkVersion = "1.9.1"
+    val chromeCustomTabsVersion = "1.0.0"
 }
