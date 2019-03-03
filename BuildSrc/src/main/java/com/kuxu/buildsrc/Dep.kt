@@ -3,10 +3,12 @@
 package dependencies
 
 import dependencies.Versions.coroutineVersion
+import dependencies.Versions.fuelVersion
 import dependencies.Versions.koinVersion
 import dependencies.Versions.kotlinSerializerVersion
 import dependencies.Versions.kotlinVersion
 import dependencies.Versions.kvsSchemaVersion
+import dependencies.Versions.mokkVersion
 import dependencies.Versions.navigationVersion
 import dependencies.Versions.preferenceVersion
 
@@ -46,8 +48,13 @@ object Dep {
     val kvsSchema = "com.rejasupotaro:kvs-schema:${kvsSchemaVersion}"
     val kvsSchemaCompiler = "com.rejasupotaro:kvs-schema-compiler:${kvsSchemaVersion}"
 
+    val fuel = "com.github.kittinunf.fuel:fuel:${fuelVersion}"
+    val fuelCoroutine = "com.github.kittinunf.fuel:coroutines:${fuelVersion}"
+    val fuelKotlinxSerialization = "com.github.kittinunf.fuel:fuel-kotlinx-serialization:${fuelVersion}"
+
     object test {
         val junit = "junit:junit:4.12"
+        val mokk = "io.mockk:mockk:$mokkVersion"
     }
 
     object androidTest {

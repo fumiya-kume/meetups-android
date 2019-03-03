@@ -1,23 +1,28 @@
 package com.kuxu.overview.ui
 
 import androidx.lifecycle.LiveData
-import com.kuxu.overview.domain.ConfiguredOverviewSettingRepository
+import com.kuxu.overview.domain.ChoosePrefectureRepository
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 import kotlin.coroutines.CoroutineContext
 
 internal class ConfiguredOverviewSettingLiveData(
-    private val configuredOverviewSettingRepository: ConfiguredOverviewSettingRepository
+    private val choosePrefectureRepository: ChoosePrefectureRepository
 ) : LiveData<Boolean>(), CoroutineScope {
-    private val job = Job()
+
+    val job = Job()
     override val coroutineContext: CoroutineContext = Dispatchers.Main + job
 
     override fun onActive() {
         super.onActive()
-        launch {
-            value = configuredOverviewSettingRepository.hasConfigured()
+        runBlocking {
+            try {
+                value = choosePrefectureRepository.hasConfigured()
+            } catch (e: Exception) {
+                value = false
+            }
         }
     }
 }

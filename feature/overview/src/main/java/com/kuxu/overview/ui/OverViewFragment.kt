@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.kuxu.overview.R
 import com.kuxu.overview.databinding.FragmentOverViewBinding
 import org.koin.android.ext.android.inject
@@ -16,11 +17,18 @@ class OverViewFragment : Fragment() {
     private val overViewFragmentViewModel: OverViewFragmentViewModel by viewModel()
     private val navController: NavController by inject()
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        overViewFragmentViewModel.refreshMeetupList()
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
         val binding =
             FragmentOverViewBinding.inflate(
                 inflater,
@@ -39,6 +47,15 @@ class OverViewFragment : Fragment() {
 
         binding.navigateSettingMaterialButton.setOnClickListener {
             navController.navigate(R.id.action_overViewFragment_to_rootSettingFragment)
+        }
+
+        val adapter = MeetupOverviewAdapter(requireContext())
+        binding.overviewRecyclerView.adapter = adapter
+
+        overViewFragmentViewModel.meetupOverviewLiveData.observeForever {
+            adapter.submitList(
+                it
+            )
         }
 
         overViewFragmentViewModel.configuredOverviewSettingLiveData.observeForever {

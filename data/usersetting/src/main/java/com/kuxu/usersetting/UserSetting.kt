@@ -11,7 +11,13 @@ class UserSetting(
     private val userSettingScheme = UserSettings.get(context)
 
     fun hasUserSetting() =
-        userSettingScheme.hasTargetPrefectureList() and userSettingScheme.targetPrefectureList.list.isNotEmpty()
+        try {
+            userSettingScheme.hasTargetPrefectureList() and userSettingScheme.targetPrefectureList.list.isNotEmpty()
+        } catch (e: Exception) {
+            userSettingScheme.removeTargetPrefectureList()
+            userSettingScheme.putTargetPrefectureList(PrefectureList(emptyList()))
+            false
+        }
 
     fun loadChoosedPrefectureList(): PrefectureList {
         try {

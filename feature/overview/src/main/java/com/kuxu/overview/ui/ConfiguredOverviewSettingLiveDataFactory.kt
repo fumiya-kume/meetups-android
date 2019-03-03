@@ -1,11 +1,12 @@
 package com.kuxu.overview.ui
 
-import com.kuxu.overview.domain.ConfiguredOverviewSettingRepository
+import com.kuxu.overview.domain.ChoosePrefectureRepository
 
 internal class ConfiguredOverviewSettingLiveDataFactory(
-    private val configuredOverviewSettingRepository: ConfiguredOverviewSettingRepository
+    private val choosePrefectureRepository: ChoosePrefectureRepository
 ) {
-    fun create() = ConfiguredOverviewSettingLiveData(
-        configuredOverviewSettingRepository
+    fun create(
+    ) = ConfiguredOverviewSettingLiveData(
+        choosePrefectureRepository
     )
 }

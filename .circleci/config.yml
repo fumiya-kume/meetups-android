@@ -35,8 +35,12 @@ jobs:
         - v1-dependencies-
 
     - run:
+        name: Install dependencies
+        command: ./gradlew dependencies
+
+    - run:
         name: Gradle Build
-        command: ./gradlew build
+        command: ./gradlew assembledebug
 
     - save_cache:
         paths:
