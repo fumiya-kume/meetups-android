@@ -11,7 +11,8 @@ internal fun MeetupEntity.convert(): MeetupOverviewBindingModel =
         this.holdingDate?.toHoldingTimeString() ?: "",
         this.holdingPlaceName,
         this.accept,
-        this.limit
+        this.limit,
+        this.eventUrl
     )
 
 internal fun Date.toHoldingTimeString() = SimpleDateFormat("yyyy/MM/dd HH:mm", Locale.JAPAN).format(this)

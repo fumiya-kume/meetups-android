@@ -21,7 +21,8 @@ internal class MeetupRepositoryImpl(
                     it.startedAt,
                     it.place,
                     it.accepted ?: 0,
-                    it.limit ?: 0
+                    it.limit ?: 0,
+                    it.eventUrl
                 )
             }
     }
