@@ -1,12 +1,17 @@
 package com.kuxu.overview.ui
 
+import android.content.ComponentName
 import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.browser.customtabs.CustomTabsCallback
+import androidx.browser.customtabs.CustomTabsClient
+import androidx.browser.customtabs.CustomTabsClient.bindCustomTabsService
 import androidx.browser.customtabs.CustomTabsIntent
+import androidx.browser.customtabs.CustomTabsServiceConnection
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import com.kuxu.overview.R
@@ -20,8 +25,28 @@ class OverViewFragment : Fragment() {
     private val overViewFragmentViewModel: OverViewFragmentViewModel by viewModel()
     private val navController: NavController by inject()
 
+    private var customTabsClient: CustomTabsClient? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        bindCustomTabsService(
+            requireContext(),
+            requireContext().packageName,
+            object : CustomTabsServiceConnection() {
+                override fun onCustomTabsServiceConnected(
+                    name: ComponentName?,
+                    client: CustomTabsClient?
+                ) {
+                    customTabsClient = client
+                    client?.warmup(0)
+                }
+
+                override fun onServiceDisconnected(name: ComponentName?) {
+                    customTabsClient = null
+                }
+            }
+        )
 
         overViewFragmentViewModel.refreshMeetupList()
     }
@@ -66,10 +91,14 @@ class OverViewFragment : Fragment() {
 
         binding.overviewRecyclerView.adapter = adapter
 
-        overViewFragmentViewModel.meetupOverviewLiveData.observeForever {
+        overViewFragmentViewModel.meetupOverviewLiveData.observeForever { bindingModelList ->
             adapter.submitList(
-                it
+                bindingModelList
             )
+            customTabsClient?.let {
+                val session = it.newSession(object : CustomTabsCallback() {})
+                bindingModelList.forEach { session.mayLaunchUrl(Uri.parse(it.eventUrl), null, null) }
+            }
         }
 
         overViewFragmentViewModel.configuredOverviewSettingLiveData.observeForever {
