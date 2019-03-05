@@ -103,12 +103,19 @@ class OverViewFragment : Fragment() {
             }
         }
 
+        binding.refreshMeetupOverviewSwipeRefreshLayout.setOnRefreshListener {
+            overViewFragmentViewModel.refreshMeetupList()
+        }
+
         overViewFragmentViewModel.configuredOverviewSettingLiveData.observeForever {
             binding.isConfiguredsetting = it
         }
 
         overViewFragmentViewModel.isLoading.observeForever {
             binding.isLoading = it
+            if (!it) {
+                binding.refreshMeetupOverviewSwipeRefreshLayout.isRefreshing = false
+            }
         }
 
         overViewFragmentViewModel.exceptionHappen = {
