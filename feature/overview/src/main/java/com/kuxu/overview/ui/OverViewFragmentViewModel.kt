@@ -14,6 +14,7 @@ internal class OverViewFragmentViewModel(
 
     val isLoading = MutableLiveData<Boolean>()
 
+    // 例外が発生した時に ViewModel から View へ通知するためのラムダ
     var exceptionHappen: (String) -> Unit = {}
 
     fun refreshMeetupList() {
