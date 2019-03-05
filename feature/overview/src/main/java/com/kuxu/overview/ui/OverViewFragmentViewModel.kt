@@ -1,5 +1,6 @@
 package com.kuxu.overview.ui
 
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
 internal class OverViewFragmentViewModel(
@@ -9,15 +10,15 @@ internal class OverViewFragmentViewModel(
 
     val configuredOverviewSettingLiveData = configuredOverviewSettingLiveDataFactory.create()
 
-    val meetupOverviewLiveData = meetupOverviewLiveDataFactory.create()
+    val meetupOverviewLiveData = meetupOverviewLiveDataFactory.create { exceptionHappen(it) }
 
-    var networkErrorCallback: () -> Unit = {}
+    val isLoading = MutableLiveData<Boolean>()
+
+    var exceptionHappen: (String) -> Unit = {}
 
     fun refreshMeetupList() {
-        try {
-            meetupOverviewLiveData.refreshMeetupOverview()
-        } catch (e: Exception) {
-            networkErrorCallback()
-        }
+        isLoading.value = true
+        meetupOverviewLiveData.refreshMeetupOverview()
+        isLoading.value = false
     }
 }

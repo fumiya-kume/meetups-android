@@ -64,6 +64,8 @@ class OverViewFragment : Fragment() {
                 false
             )
 
+
+
         binding.mainMenuToolBar.inflateMenu(R.menu.main)
 
         binding.mainMenuToolBar.setOnMenuItemClickListener {
@@ -105,10 +107,14 @@ class OverViewFragment : Fragment() {
             binding.isConfiguredsetting = it
         }
 
-        overViewFragmentViewModel.networkErrorCallback = {
+        overViewFragmentViewModel.isLoading.observeForever {
+            binding.isLoading = it
+        }
+
+        overViewFragmentViewModel.exceptionHappen = {
             Toast.makeText(
                 requireContext(),
-                "ネットワークエラーが発生しました",
+                it,
                 Toast.LENGTH_LONG
             ).show()
         }

@@ -15,7 +15,8 @@ import kotlin.coroutines.CoroutineContext
 
 internal class MeetupOverviewLiveData(
     private val choosePrefectureRepository: ChoosePrefectureRepository,
-    private val loadMeetupOverviewListUsecase: LoadMeetupOverviewListUsecase
+    private val loadMeetupOverviewListUsecase: LoadMeetupOverviewListUsecase,
+    var exceptionHappen: ((message: String) -> Unit)
 ) : MutableLiveData<List<MeetupOverviewBindingModel>>(), CoroutineScope {
 
     val job = Job()
@@ -36,6 +37,7 @@ internal class MeetupOverviewLiveData(
                             .convert()
                     } catch (e: Exception) {
                         value = emptyList()
+                        exceptionHappen("例外が発生しました")
                     }
                 }
             }
