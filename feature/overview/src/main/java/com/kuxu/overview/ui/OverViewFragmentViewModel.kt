@@ -5,7 +5,7 @@ import androidx.lifecycle.ViewModel
 
 internal class OverViewFragmentViewModel(
     configuredOverviewSettingLiveDataFactory: ConfiguredOverviewSettingLiveDataFactory,
-    private val meetupOverviewLiveDataFactory: MeetupOverviewLiveDataFactory
+    meetupOverviewLiveDataFactory: MeetupOverviewLiveDataFactory
 ) : ViewModel() {
 
     val configuredOverviewSettingLiveData = configuredOverviewSettingLiveDataFactory.create()
