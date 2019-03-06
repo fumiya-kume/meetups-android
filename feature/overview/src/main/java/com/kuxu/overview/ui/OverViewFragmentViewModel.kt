@@ -20,6 +20,5 @@ internal class OverViewFragmentViewModel(
     fun refreshMeetupList() {
         isLoading.value = true
         meetupOverviewLiveData.refreshMeetupOverview()
-        isLoading.value = false
     }
 }

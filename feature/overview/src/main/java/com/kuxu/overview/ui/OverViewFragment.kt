@@ -94,6 +94,7 @@ class OverViewFragment : Fragment() {
         binding.overviewRecyclerView.adapter = adapter
 
         overViewFragmentViewModel.meetupOverviewLiveData.observeForever { bindingModelList ->
+            overViewFragmentViewModel.isLoading.postValue(bindingModelList.isEmpty())
             adapter.submitList(
                 bindingModelList
             )
