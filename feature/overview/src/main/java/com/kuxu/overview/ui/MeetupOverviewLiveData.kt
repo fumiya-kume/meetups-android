@@ -45,7 +45,6 @@ internal class MeetupOverviewLiveData(
                         exceptionHappen("例外が発生しました")
                     }
                 }
-
             }
         }
     }
