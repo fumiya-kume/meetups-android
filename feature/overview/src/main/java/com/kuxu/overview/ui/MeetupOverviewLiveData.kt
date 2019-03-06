@@ -10,6 +10,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import kotlin.coroutines.CoroutineContext
 
 internal class MeetupOverviewLiveData(
@@ -40,7 +41,9 @@ internal class MeetupOverviewLiveData(
                     postValue(
                         emptyList()
                     )
-                    exceptionHappen("例外が発生しました")
+                    withContext(Dispatchers.Main) {
+                        exceptionHappen("例外が発生しました")
+                    }
                 }
 
             }
