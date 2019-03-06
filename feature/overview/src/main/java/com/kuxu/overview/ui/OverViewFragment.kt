@@ -51,6 +51,8 @@ class OverViewFragment : Fragment() {
             }
         )
 
+        // MutableLiveDataOf() が本番に取り込まれるまで一時的にFragment でViewModel の Mutable Livedata へ値をセットする
+        overViewFragmentViewModel.isLoading.postValue(false)
         overViewFragmentViewModel.refreshMeetupList()
     }
 
