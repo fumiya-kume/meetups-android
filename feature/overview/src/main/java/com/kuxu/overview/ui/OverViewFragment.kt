@@ -4,6 +4,9 @@ import android.content.ComponentName
 import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
@@ -51,6 +54,15 @@ class OverViewFragment : Fragment() {
         overViewFragmentViewModel.refreshMeetupList()
     }
 
+    override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) =
+        inflater?.inflate(R.menu.main, menu) ?: Unit
+
+    override fun onOptionsItemSelected(item: MenuItem?) =
+        when (item?.itemId) {
+            R.id.setting_menu -> navigateSettingPage()
+            else -> true
+        }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -63,17 +75,6 @@ class OverViewFragment : Fragment() {
                 container,
                 false
             )
-
-
-
-        binding.mainMenuToolBar.inflateMenu(R.menu.main)
-
-        binding.mainMenuToolBar.setOnMenuItemClickListener {
-            when (it.itemId) {
-                R.id.setting_menu -> navigateSettingPage()
-                else -> true
-            }
-        }
 
         binding.navigateSettingMaterialButton.setOnClickListener {
             navController.navigate(R.id.action_overViewFragment_to_rootSettingFragment)
