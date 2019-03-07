@@ -5,15 +5,4 @@
              android:layout_width="match_parent" android:layout_height="match_parent"
              tools:context=".RootSettingFragment">
 
-    <androidx.appcompat.widget.Toolbar
-            app:title="@string/setting_page_title"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-    </androidx.appcompat.widget.Toolbar>
-
-    <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="@string/hello_blank_fragment"/>
 </FrameLayout>

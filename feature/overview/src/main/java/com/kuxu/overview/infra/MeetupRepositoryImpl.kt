@@ -11,8 +11,10 @@ internal class MeetupRepositoryImpl(
     override suspend fun searchMeetupByPrefectureList(
         prefectureList: List<Prefecture>
     ): List<MeetupEntity> {
-        return ConnpassClient.builder()
-            .request().eventList
+        return ConnpassClient
+            .builder()
+            .request()
+            .eventList
             .filter { exitstPrefecture(it, prefectureList) }
             .map {
                 MeetupEntity(
@@ -21,7 +23,8 @@ internal class MeetupRepositoryImpl(
                     it.startedAt,
                     it.place,
                     it.accepted ?: 0,
-                    it.limit ?: 0
+                    it.limit ?: 0,
+                    it.eventUrl
                 )
             }
     }

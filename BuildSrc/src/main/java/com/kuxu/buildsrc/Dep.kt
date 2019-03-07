@@ -2,6 +2,7 @@
 
 package dependencies
 
+import dependencies.Versions.chromeCustomTabsVersion
 import dependencies.Versions.coroutineVersion
 import dependencies.Versions.fuelVersion
 import dependencies.Versions.koinVersion
@@ -34,6 +35,8 @@ object Dep {
         val navigationUiKtx = "android.arch.navigation:navigation-ui-ktx:${navigationVersion}"
 
         val preference = "androidx.preference:preference:${preferenceVersion}"
+
+        val chromeCustomTabs = "androidx.browser:browser:$chromeCustomTabsVersion"
     }
 
     object koin {

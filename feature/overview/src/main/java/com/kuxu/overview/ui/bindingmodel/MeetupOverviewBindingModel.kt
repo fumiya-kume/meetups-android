@@ -6,5 +6,6 @@ internal data class MeetupOverviewBindingModel(
     val holdingDate: String?,
     val holdingPlaceName: String?,
     val accept: Int,
-    val limit: Int
+    val limit: Int,
+    val eventUrl: String
 )

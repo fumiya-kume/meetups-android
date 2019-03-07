@@ -8,5 +8,6 @@ internal data class MeetupEntity(
     val holdingDate: Date?,
     val holdingPlaceName: String?,
     val accept: Int,
-    val limit: Int
+    val limit: Int,
+    val eventUrl: String
 )

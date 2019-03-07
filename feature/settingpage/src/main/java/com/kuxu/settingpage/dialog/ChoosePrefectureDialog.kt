@@ -39,31 +39,62 @@ internal class ChoosePrefectureDialog : BottomSheetDialogFragment(), CoroutineSc
             false
         )
 
-        context?.let {
+        val adapter = ChoosePrefectureAdapter(requireContext())
+        binding.prefectureRecyclerView.adapter = adapter
 
-            val adapter = ChoosePrefectureAdapter(it)
-            binding.prefectureRecyclerView.adapter = adapter
-
-            adapter.onclickListener = object : ChoosePrefectureEventListener {
-                override fun onClick(id: Int, newValue: Boolean) {
-                    launch {
-                        try {
-                            prefectureSelectedUsecase.updateChooseStatus(
-                                id,
-                                newValue
-                            )
-                        } catch (e: java.lang.Exception) {
-                            dismiss()
-                        } finally {
-                            updatePrefectureList(adapter)
-                        }
+        adapter.onclickListener = object : ChoosePrefectureEventListener {
+            override fun onClick(id: Int, newValue: Boolean) {
+                launch {
+                    try {
+                        prefectureSelectedUsecase.updateChooseStatus(
+                            id,
+                            newValue
+                        )
+                    } catch (e: java.lang.Exception) {
+                        dismiss()
+                    } finally {
+                        updatePrefectureList(adapter)
                     }
                 }
             }
-
-            binding.prefectureRecyclerView.layoutManager = LinearLayoutManager(context)
-            updatePrefectureList(adapter)
         }
+
+        binding.choosePrefectureDialogAllSelectPrefectureMaterialButton.setOnClickListener {
+            launch {
+                try {
+                    prefectureRepository.loadPrefectureList().forEach {
+                        prefectureSelectedUsecase.updateChooseStatus(
+                            it.id,
+                            true
+                        )
+                    }
+                } catch (e: java.lang.Exception) {
+                    dismiss()
+                } finally {
+                    updatePrefectureList(adapter)
+                }
+            }
+        }
+
+        binding.removeChoosePrefectureDialogAllSelectPrefectureMaterialButton.setOnClickListener {
+            launch {
+                try {
+                    prefectureRepository.loadPrefectureList().forEach {
+                        prefectureSelectedUsecase.updateChooseStatus(
+                            it.id,
+                            false
+                        )
+                    }
+                } catch (e: java.lang.Exception) {
+                    dismiss()
+                } finally {
+                    updatePrefectureList(adapter)
+                }
+            }
+        }
+
+        binding.prefectureRecyclerView.layoutManager = LinearLayoutManager(context)
+        updatePrefectureList(adapter)
 
         return binding.root
     }

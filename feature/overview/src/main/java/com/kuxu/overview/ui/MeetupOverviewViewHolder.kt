@@ -24,8 +24,12 @@ internal class MeetupOverviewViewHolder private constructor(
     }
 
     fun bind(
-        bindingModel: MeetupOverviewBindingModel
+        bindingModel: MeetupOverviewBindingModel,
+        onOverviewMeetupEventItemClicked: OnOverviewMeetupEventItemClicked?
     ) {
         binding.bindingModel = bindingModel
+        binding.root.setOnClickListener {
+            onOverviewMeetupEventItemClicked?.onClick(bindingModel)
+        }
     }
 }

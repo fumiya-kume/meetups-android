@@ -75,6 +75,7 @@ dependencies {
     implementation Dep.androidx.navigatiomCommonKtx
     implementation Dep.androidx.navigationFragmentKtx
     implementation Dep.androidx.navigationUiKtx
+    implementation Dep.androidx.chromeCustomTabs
 
     // Koin
     implementation Dep.koin.koinCore
@@ -83,6 +84,7 @@ dependencies {
     implementation Dep.koin.koinAndroid
     implementation Dep.koin.koinAndroidScope
     implementation Dep.koin.koinAndroidViewModel
+
 
     testImplementation Dep.test.junit
     testImplementation Dep.test.mokk

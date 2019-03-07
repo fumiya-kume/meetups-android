@@ -8,8 +8,10 @@ internal class MeetupOverviewLiveDataFactory(
     private val loadMeetupOverviewListUsecase: LoadMeetupOverviewListUsecase
 ) {
     fun create(
+        exceptionHappen: (message: String) -> Unit
     ) = MeetupOverviewLiveData(
         choosePrefectureRepository,
-        loadMeetupOverviewListUsecase
+        loadMeetupOverviewListUsecase,
+        exceptionHappen
     )
 }
