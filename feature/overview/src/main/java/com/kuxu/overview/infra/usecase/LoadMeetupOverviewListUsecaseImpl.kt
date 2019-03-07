@@ -13,7 +13,6 @@ internal class LoadMeetupOverviewListUsecaseImpl(
 ) : LoadMeetupOverviewListUsecase {
     override suspend fun execute(): List<MeetupEntity> =
         withContext(Dispatchers.IO) {
-            val result = choosePrefectureRepository.hasConfigured()
             if (!choosePrefectureRepository.hasConfigured()) {
                 return@withContext emptyList<MeetupEntity>()
             }
