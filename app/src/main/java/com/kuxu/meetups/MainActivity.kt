@@ -24,5 +24,7 @@ class MainActivity : AppCompatActivity() {
         StandAloneContext.loadKoinModules(
             navigationModule
         )
+
+        setSupportActionBar(findViewById(R.id.main_menu_tool_bar))
     }
 }

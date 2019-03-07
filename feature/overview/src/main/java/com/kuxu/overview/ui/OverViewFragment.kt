@@ -56,8 +56,16 @@ class OverViewFragment : Fragment() {
         overViewFragmentViewModel.refreshMeetupList()
     }
 
-    override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) =
+
+    override fun onCreateOptionsMenu(
+        menu: Menu?,
+        inflater: MenuInflater?
+    ) {
+        super.onCreateOptionsMenu(menu, inflater)
+        menu?.clear()
         inflater?.inflate(R.menu.main, menu) ?: Unit
+    }
+
 
     override fun onOptionsItemSelected(item: MenuItem?) =
         when (item?.itemId) {
@@ -70,6 +78,7 @@ class OverViewFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        setHasOptionsMenu(true)
 
         val binding =
             FragmentOverViewBinding.inflate(
