@@ -9,6 +9,8 @@ apply plugin: "de.mannodermaus.android-junit5"
 android {
     compileSdkVersion 28
 
+
+
     defaultConfig {
         minSdkVersion 21
         targetSdkVersion 28
@@ -25,42 +27,14 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
     dataBinding {
         enabled = true
     }
 
-    sourceSets.each {
-        it.java.srcDirs += "src/$it.name/kotlin"
-    }
-
-    testOptions {
-        junitPlatform {
-            filters {
-                engines {
-                    include 'spek2'
-                }
-            }
-            jacocoOptions {
-                // here goes all jacoco config, for example
-                html.enabled = true
-                xml.enabled = false
-                csv.enabled = false
-                unitTests.all {
-                    testLogging.events = ["passed", "skipped", "failed"]
-                }
-            }
-        }
-    }
 }
 
 dependencies {
-    implementation project(":navigation")
-    implementation project(":data:usersetting")
-    implementation project(":data:config")
-    implementation project(":data:entity")
-    implementation project(":data:api")
-    implementation project(":feature:search")
-
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation Dep.kotlin.coroutine
     implementation Dep.kotlin.stdLib
@@ -85,7 +59,6 @@ dependencies {
     implementation Dep.koin.koinAndroid
     implementation Dep.koin.koinAndroidScope
     implementation Dep.koin.koinAndroidViewModel
-
 
     testImplementation Dep.test.junit
     testImplementation Dep.test.mokk

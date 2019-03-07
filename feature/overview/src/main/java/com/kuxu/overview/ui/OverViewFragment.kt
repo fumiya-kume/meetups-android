@@ -91,6 +91,10 @@ class OverViewFragment : Fragment() {
             navController.navigate(R.id.action_overViewFragment_to_rootSettingFragment)
         }
 
+        binding.fragmentOverviewNavigateSerachFragmentFloatingActionButton.setOnClickListener {
+            navController.navigate(R.id.action_overviewFragment_to_rootSearchFragment)
+        }
+
         val adapter = MeetupOverviewAdapter(requireContext())
 
         adapter.onOverviewMeetupEventItemClicked = object : OnOverviewMeetupEventItemClicked {

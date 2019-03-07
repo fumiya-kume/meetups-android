@@ -88,5 +88,13 @@
                     app:layout_constraintTop_toBottomOf="@+id/setting_alert_text_view"/>
         </androidx.constraintlayout.widget.ConstraintLayout>
 
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/fragment_overview_navigate_serach_fragment_floating_action_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:foregroundGravity="bottom|right" app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginEnd="8dp" android:layout_marginBottom="8dp"
+                app:layout_constraintBottom_toBottomOf="parent" android:src="@drawable/ic_baseline_search_24px"/>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
