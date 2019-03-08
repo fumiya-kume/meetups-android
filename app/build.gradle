@@ -27,19 +27,17 @@ android {
 }
 
 dependencies {
-    implementation project(":navigation")
-    implementation project(":data:config")
-    implementation project(":data:usersetting")
-    implementation project(":feature:overview")
-    implementation project(":feature:settingpage")
-
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation project(':navigation')
+    implementation project(':data:config')
+    implementation project(':data:usersetting')
+    implementation project(':feature:overview')
+    implementation project(':feature:settingpage')
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation Dep.kotlin.stdLib
     implementation Dep.androidx.appCompat
     implementation Dep.androidx.kotlinExtension
     implementation Dep.androidx.constraintLayout
     implementation Dep.material
-
     // navigation Architecture Component
     implementation Dep.androidx.navigationFragment
     implementation Dep.androidx.navigationUi
@@ -47,7 +45,6 @@ dependencies {
     implementation Dep.androidx.navigatiomCommonKtx
     implementation Dep.androidx.navigationFragmentKtx
     implementation Dep.androidx.navigationUiKtx
-
     // Koin
     implementation Dep.koin.koinCore
     implementation Dep.koin.koinCoreExt
@@ -55,9 +52,8 @@ dependencies {
     implementation Dep.koin.koinAndroid
     implementation Dep.koin.koinAndroidScope
     implementation Dep.koin.koinAndroidViewModel
-
     testImplementation Dep.test.junit
-
     androidTestImplementation Dep.androidTest.androidx.testRunner
     androidTestImplementation Dep.androidTest.androidx.espresso
+    implementation project(':feature:search')
 }

@@ -1,4 +1,4 @@
-package com.kuxu.search
+package com.kuxu.search.ui
 
 import android.os.Bundle
 import android.view.LayoutInflater

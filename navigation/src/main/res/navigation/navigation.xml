@@ -24,7 +24,7 @@
 
     <fragment
             android:id="@+id/rootSearchFragment"
-            android:name="com.kuxu.search.SearchMainFragment"
+            android:name="com.kuxu.search.ui.SearchMainFragment"
             android:label="RootSearchFragment">
         <action
                 android:id="@+id/action_rootSearchFragment_to_searchResultFragment"
@@ -33,7 +33,7 @@
 
     <fragment
             android:id="@+id/SearchResultFragment"
-            android:name="com.kuxu.search.SearchResultFragment"
+            android:name="com.kuxu.search.ui.SearchResultFragment"
             android:label="RootSearchFragment">
         <!--<argument-->
                 <!--android:name="search_query"-->
