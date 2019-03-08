@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
+import com.kuxu.navigation.SearchQueryEntity
 import com.kuxu.search.databinding.FragmentSearchMainBinding
 import org.koin.android.ext.android.inject
 
@@ -21,7 +22,11 @@ class SearchMainFragment : Fragment() {
         )
 
         binding.sarchEventMaterialButton.setOnClickListener {
-            navController.navigate(R.id.action_rootSearchFragment_to_searchResultFragment)
+            val action =
+                SearchMainFragmentDirections.actionRootSearchFragmentToSearchResultFragment(
+                    SearchQueryEntity("引数")
+                )
+            navController.navigate(action)
         }
 
         return binding.root

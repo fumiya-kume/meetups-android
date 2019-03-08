@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import com.kuxu.search.databinding.FragmentSearchResultBinding
 
 class SearchResultFragment : Fragment() {
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -19,6 +20,11 @@ class SearchResultFragment : Fragment() {
                 container,
                 false
             )
+
+        arguments?.let {
+            val arg = SearchResultFragmentArgs.fromBundle(it)
+            binding.searchResultTextView.text = arg.searchQuery.keyword
+        }
 
         return binding.root
     }

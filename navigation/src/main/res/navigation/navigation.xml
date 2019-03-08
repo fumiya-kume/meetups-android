@@ -34,5 +34,12 @@
     <fragment
             android:id="@+id/SearchResultFragment"
             android:name="com.kuxu.search.SearchResultFragment"
-            android:label="RootSearchFragment"/>
+            android:label="RootSearchFragment">
+        <!--<argument-->
+                <!--android:name="search_query"-->
+                <!--android:defaultValue="@null"-->
+                <!--app:nullable="true"-->
+                <!--app:argType="com.kuxu.navigation.SearchQueryEntity"/>-->
+        <argument android:name="search_query" app:argType="com.kuxu.navigation.SearchQueryEntity"/>
+    </fragment>
 </navigation>
