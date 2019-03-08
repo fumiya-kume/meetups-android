@@ -22,10 +22,14 @@ class SearchMainFragment : Fragment() {
         )
 
         binding.sarchEventMaterialButton.setOnClickListener {
+
+            val keyword = binding.searchKeywordTextInputEditText.text.toString()
+
             val action =
                 SearchMainFragmentDirections.actionRootSearchFragmentToSearchResultFragment(
-                    SearchQueryEntity("引数")
+                    SearchQueryEntity(keyword)
                 )
+            
             navController.navigate(action)
         }
 
