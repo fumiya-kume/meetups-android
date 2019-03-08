@@ -35,6 +35,8 @@ android {
 }
 
 dependencies {
+    implementation project(":navigation")
+
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation Dep.kotlin.coroutine
     implementation Dep.kotlin.stdLib

@@ -25,5 +25,14 @@
     <fragment
             android:id="@+id/rootSearchFragment"
             android:name="com.kuxu.search.SearchMainFragment"
+            android:label="RootSearchFragment">
+        <action
+                android:id="@+id/action_rootSearchFragment_to_searchResultFragment"
+                app:destination="@+id/SearchResultFragment"/>
+    </fragment>
+
+    <fragment
+            android:id="@+id/SearchResultFragment"
+            android:name="com.kuxu.search.SearchResultFragment"
             android:label="RootSearchFragment"/>
 </navigation>
