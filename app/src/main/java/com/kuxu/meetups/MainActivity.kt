@@ -17,9 +17,10 @@ class MainActivity : AppCompatActivity() {
 
         val navController = NavHostFragment.findNavController(my_nav_host_fragment)
 
-        val navigationModule = module {
-            single { navController }
-        }
+        val navigationModule =
+            module(override = true) {
+                single { navController }
+            }
 
         StandAloneContext.loadKoinModules(
             navigationModule
