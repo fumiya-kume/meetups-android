@@ -1,2 +1,0 @@
-include ':feature:settingpage', ':navigation', ':data:config', ':data:entity', ':data:api', ':feature:search', ':base'
-include ":app", ":data:usersetting", ":feature:overview"
