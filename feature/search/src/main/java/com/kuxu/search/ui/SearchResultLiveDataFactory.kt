@@ -8,7 +8,7 @@ internal class SearchResultLiveDataFactory(
 ) {
     fun create(
         eventSearchQuery: EventSearchQuery,
-        searchError: (Unit) -> Unit
+        searchError: (String) -> Unit
     ): SearchResultLiveData =
         SearchResultLiveData(
             eventSearchQuery,

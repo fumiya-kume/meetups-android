@@ -15,7 +15,7 @@ internal class SearchResultFragmentViewModel(
 
     private var _searchResultLiveData: MutableLiveData<List<SearchResultBindingModel>> = MutableLiveData()
 
-    val searchError: (Unit) -> Unit = {}
+    var searchError: (String) -> Unit = {}
 
     fun search(eventSearchQuery: EventSearchQuery) {
         _searchResultLiveData =

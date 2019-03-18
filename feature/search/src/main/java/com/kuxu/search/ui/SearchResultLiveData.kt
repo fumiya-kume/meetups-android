@@ -14,13 +14,14 @@ import kotlin.coroutines.CoroutineContext
 internal class SearchResultLiveData(
     private val searchQuery: EventSearchQuery,
     private val meetupSearchUsecase: MeetupSearchUsecase,
-    private val searchError: (Unit) -> Unit
+    private val searchError: (String) -> Unit
 ) : MutableLiveData<List<SearchResultBindingModel>>(), CoroutineScope {
     private val job = Job()
     override val coroutineContext: CoroutineContext = Dispatchers.Main + job
 
     override fun onActive() {
-        launch(Dispatchers.IO) {
+        super.onActive()
+        launch {
             try {
                 postValue(
                     meetupSearchUsecase
@@ -32,5 +33,11 @@ internal class SearchResultLiveData(
                 searchError
             }
         }
+    }
+
+    override fun onInactive() {
+        super.onInactive()
+
+        job.cancel()
     }
 }
