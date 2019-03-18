@@ -53,9 +53,13 @@ class OverViewFragment : Fragment() {
 
         // MutableLiveDataOf() が本番に取り込まれるまで一時的にFragment でViewModel の Mutable Livedata へ値をセットする
         overViewFragmentViewModel.isLoading.postValue(false)
-        overViewFragmentViewModel.refreshMeetupList()
     }
 
+    override fun onResume() {
+        super.onResume()
+
+        overViewFragmentViewModel.refreshMeetupList()
+    }
 
     override fun onCreateOptionsMenu(
         menu: Menu?,
@@ -89,6 +93,10 @@ class OverViewFragment : Fragment() {
 
         binding.navigateSettingMaterialButton.setOnClickListener {
             navController.navigate(R.id.action_overViewFragment_to_rootSettingFragment)
+        }
+
+        binding.fragmentOverviewNavigateSerachFragmentFloatingActionButton.setOnClickListener {
+            navController.navigate(R.id.action_overviewFragment_to_rootSearchFragment)
         }
 
         val adapter = MeetupOverviewAdapter(requireContext())

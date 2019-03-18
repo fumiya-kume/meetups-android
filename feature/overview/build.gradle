@@ -59,6 +59,7 @@ dependencies {
     implementation project(":data:config")
     implementation project(":data:entity")
     implementation project(":data:api")
+    implementation project(":feature:search")
 
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation Dep.kotlin.coroutine

@@ -1,14 +1,9 @@
-import dependencies.Dep
-
 apply plugin: 'com.android.library'
-apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
-apply plugin: "androidx.navigation.safeargs"
+apply plugin: 'kotlin-android'
 
 android {
     compileSdkVersion 28
-
-
 
     defaultConfig {
         minSdkVersion 21
@@ -27,18 +22,19 @@ android {
         }
     }
 
-    androidExtensions {
-        experimental = true
-    }
-
 }
 
 dependencies {
-    // navigation Architecture Component
-    implementation Dep.androidx.navigationFragment
-    implementation Dep.androidx.navigationUi
-    implementation Dep.androidx.navigationRuntimeKtx
-    implementation Dep.androidx.navigatiomCommonKtx
-    implementation Dep.androidx.navigationFragmentKtx
-    implementation Dep.androidx.navigationUiKtx
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    implementation 'com.android.support:appcompat-v7:28.0.0'
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'com.android.support.test:runner:1.0.2'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlinVersion"
+
+    testImplementation "android.arch.core:core-testing:1.1.1"
+}
+repositories {
+    mavenCentral()
 }
