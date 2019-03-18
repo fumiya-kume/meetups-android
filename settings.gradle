@@ -1,2 +1,22 @@
-include ':feature:settingpage', ':navigation', ':data:config', ':data:entity', ':data:api', ':feature:search', ':base'
-include ":app", ":data:usersetting", ":feature:overview"
+include ":navigation"
+include ":base"
+include ":app"
+
+def dataModuleList = [
+        ":config",
+        ":api",
+        ":entity",
+        ":usersetting"
+]
+dataModuleList.each { moduleName ->
+    include ":data${moduleName}"
+}
+
+def featureModuleList = [
+        ":overview",
+        ":settingpage",
+        ":search"
+]
+featureModuleList.each { moduleName ->
+    include ":feature${moduleName}"
+}
