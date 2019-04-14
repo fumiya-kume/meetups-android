@@ -5,28 +5,18 @@ import com.kuxu.api.entity.Event
 import com.kuxu.overview.domain.MeetupRepository
 import com.kuxu.overview.entity.MeetupEntity
 import com.kuxu.overview.entity.Prefecture
+import com.kuxu.overview.entity.convert
 
 internal class MeetupRepositoryImpl(
+    private val connpassClient: ConnpassClient
 ) : MeetupRepository {
     override suspend fun searchMeetupByPrefectureList(
         prefectureList: List<Prefecture>
     ): List<MeetupEntity> {
-        return ConnpassClient
-            .builder()
-            .request()
-            .eventList
+        return connpassClient
+            .loadAllEventList()
             .filter { exitstPrefecture(it, prefectureList) }
-            .map {
-                MeetupEntity(
-                    it.id,
-                    it.title,
-                    it.startedAt,
-                    it.place,
-                    it.accepted ?: 0,
-                    it.limit ?: 0,
-                    it.eventUrl
-                )
-            }
+            .convert()
     }
 
     private fun exitstPrefecture(event: Event, list: List<Prefecture>) =

@@ -1,8 +1,8 @@
 package com.kuxu.search.ui.bindingmodel
 
-import com.kuxu.search.entity.MeetupResultEntity
+import com.kuxu.search.entity.EventEntity
 
-internal fun MeetupResultEntity.convert(): SearchResultBindingModel =
+internal fun EventEntity.convert(): SearchResultBindingModel =
     SearchResultBindingModel(
         this.id,
         this.title,
@@ -13,4 +13,4 @@ internal fun MeetupResultEntity.convert(): SearchResultBindingModel =
         this.eventUrl
     )
 
-internal fun List<MeetupResultEntity>.convert(): List<SearchResultBindingModel> = this.map { it.convert() }
+internal fun List<EventEntity>.convert(): List<SearchResultBindingModel> = this.map { it.convert() }

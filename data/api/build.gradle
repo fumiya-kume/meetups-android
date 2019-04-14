@@ -9,7 +9,6 @@ android {
     compileSdkVersion 28
 
 
-
     defaultConfig {
         minSdkVersion 21
         targetSdkVersion 28
@@ -39,8 +38,19 @@ dependencies {
     implementation Dep.androidx.kotlinExtension
     implementation Dep.kotlin.coroutine
 
-    implementation Dep.fuel
-    implementation Dep.fuelKotlinxSerialization
+    // firebase
+    implementation Dep.firebase.core
+    implementation Dep.firebase.firestore
+
+    // Koin
+    implementation Dep.koin.koinCore
+    implementation Dep.koin.koinCoreExt
+    implementation Dep.koin.koinTest
+    implementation Dep.koin.koinAndroid
+    implementation Dep.koin.koinAndroidScope
+    implementation Dep.koin.koinAndroidViewModel
+
+    implementation Dep.kotlin.coroutine
 
     testImplementation Dep.test.junit
 

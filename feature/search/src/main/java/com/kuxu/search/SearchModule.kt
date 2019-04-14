@@ -13,7 +13,7 @@ val searchModule = module {
     viewModel { SearchResultFragmentViewModel(get()) }
 
     factory { MeetupSearchUsecaseImpl(get()) as MeetupSearchUsecase }
-    factory { MeetupRepositoryImpl() as MeetupRepository }
+    factory { MeetupRepositoryImpl(get()) as MeetupRepository }
 
     factory { SearchResultLiveDataFactory(get()) }
 }

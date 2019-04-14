@@ -55,6 +55,12 @@ object Dep {
     val fuelCoroutine = "com.github.kittinunf.fuel:coroutines:${fuelVersion}"
     val fuelKotlinxSerialization = "com.github.kittinunf.fuel:fuel-kotlinx-serialization:${fuelVersion}"
 
+    object firebase {
+        private val version = "18.2.0"
+        val core = "com.google.firebase:firebase-core:16.0.8"
+        val firestore =  "com.google.firebase:firebase-firestore:$version"
+    }
+
     object test {
         val junit = "junit:junit:4.12"
         val mokk = "io.mockk:mockk:$mokkVersion"

@@ -9,7 +9,7 @@ import com.kuxu.base.AwaitableLambda
 import com.kuxu.base.AwaitableObserber
 import com.kuxu.search.domain.MeetupSearchUsecase
 import com.kuxu.search.entity.EventSearchQuery
-import com.kuxu.search.entity.MeetupResultEntity
+import com.kuxu.search.entity.EventEntity
 import com.kuxu.search.ui.bindingmodel.SearchResultBindingModel
 import io.mockk.coEvery
 import io.mockk.every
@@ -60,7 +60,7 @@ internal class SearchResultFragmentViewModelTest : Spek({
 
         val meetupResultEntityList =
             listOf(
-                MeetupResultEntity(
+                EventEntity(
                     0,
                     "タイトル",
                     "2019/1/1 12:10".toDate(),

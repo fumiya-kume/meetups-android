@@ -6,6 +6,7 @@ import com.kuxu.overview.domain.MeetupRepository
 import com.kuxu.overview.entity.MeetupEntity
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import java.util.*
 
 internal class LoadMeetupOverviewListUsecaseImpl(
     private val choosePrefectureRepository: ChoosePrefectureRepository,
@@ -18,6 +19,6 @@ internal class LoadMeetupOverviewListUsecaseImpl(
             }
             meetupRepository.searchMeetupByPrefectureList(
                 choosePrefectureRepository.loadChoosePrefecture()
-            )
+            ).filter { it.holdingDate?.time ?: Long.MAX_VALUE > Calendar.getInstance().time.time }
         }
 }

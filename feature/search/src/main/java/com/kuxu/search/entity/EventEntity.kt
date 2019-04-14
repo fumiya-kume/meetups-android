@@ -2,7 +2,7 @@ package com.kuxu.search.entity
 
 import java.util.*
 
-internal data class MeetupResultEntity(
+internal data class EventEntity(
     val id: Int,
     val title: String?,
     val holdingDate: Date?,

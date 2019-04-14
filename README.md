@@ -17,3 +17,9 @@
 - navigation Module -> One
 - feature Module -> Any
 - data Module -> Any
+
+# Build Setup
+```
+firebase.application_id=
+firebase.api_key=
+```
