@@ -7,5 +7,10 @@
                 android:key="choose_prefecture"
                 android:title="住んでいる県を選択する"
         />
+
+        <SwitchPreference
+                android:key="low_energy_mode"
+                android:title="節電モードにする"
+        />
     </PreferenceCategory>
 </PreferenceScreen>

@@ -15,6 +15,9 @@ class UserSettingsSchema {
         serializer = PrefectureListSealizer::class
     )
     val targetPrefectureList: String = ""
+
+    @Key(name = "enabled_low_energy_mode")
+    val enabledLowEnergyMode: Boolean = false
 }
 
 internal class PrefectureListSealizer : PrefsSerializer<PrefectureList, String> {
