@@ -24,7 +24,7 @@ class MyApplication : Application() {
                 .setProjectId("meetups-kuxu")
                 .build()
         )
-        
+
         startKoin(
             applicationContext,
             listOf(
