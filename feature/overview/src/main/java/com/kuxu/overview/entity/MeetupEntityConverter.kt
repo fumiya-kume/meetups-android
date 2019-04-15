@@ -5,7 +5,7 @@ import com.kuxu.api.entity.Event
 internal fun Event.convert(): MeetupEntity = MeetupEntity(
     this.event_id,
     this.title,
-    this.startedAt,
+    this.started_at,
     this.place,
     this.accepted ?: 0,
     this.limit ?: 0,

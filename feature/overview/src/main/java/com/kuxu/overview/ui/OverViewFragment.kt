@@ -3,12 +3,7 @@ package com.kuxu.overview.ui
 import android.content.ComponentName
 import android.net.Uri
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.Menu
-import android.view.MenuInflater
-import android.view.MenuItem
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.Toast
 import androidx.browser.customtabs.CustomTabsCallback
 import androidx.browser.customtabs.CustomTabsClient
@@ -20,6 +15,7 @@ import androidx.navigation.NavController
 import com.kuxu.overview.R
 import com.kuxu.overview.databinding.FragmentOverViewBinding
 import com.kuxu.overview.ui.bindingmodel.MeetupOverviewBindingModel
+import com.kuxu.usersetting.UserSetting
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -27,29 +23,32 @@ class OverViewFragment : Fragment() {
 
     private val overViewFragmentViewModel: OverViewFragmentViewModel by viewModel()
     private val navController: NavController by inject()
+    private val userSetting: UserSetting by inject()
 
     private var customTabsClient: CustomTabsClient? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        bindCustomTabsService(
-            requireContext(),
-            requireContext().packageName,
-            object : CustomTabsServiceConnection() {
-                override fun onCustomTabsServiceConnected(
-                    name: ComponentName?,
-                    client: CustomTabsClient?
-                ) {
-                    customTabsClient = client
-                    client?.warmup(0)
-                }
+        if (userSetting.loadLowEnergyMode()) {
+            bindCustomTabsService(
+                requireContext(),
+                requireContext().packageName,
+                object : CustomTabsServiceConnection() {
+                    override fun onCustomTabsServiceConnected(
+                        name: ComponentName?,
+                        client: CustomTabsClient?
+                    ) {
+                        customTabsClient = client
+                        client?.warmup(0)
+                    }
 
-                override fun onServiceDisconnected(name: ComponentName?) {
-                    customTabsClient = null
+                    override fun onServiceDisconnected(name: ComponentName?) {
+                        customTabsClient = null
+                    }
                 }
-            }
-        )
+            )
+        }
 
         // MutableLiveDataOf() が本番に取り込まれるまで一時的にFragment でViewModel の Mutable Livedata へ値をセットする
         overViewFragmentViewModel.isLoading.postValue(false)

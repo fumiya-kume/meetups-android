@@ -6,7 +6,7 @@ internal fun Event.convert(): EventEntity =
     EventEntity(
         event_id,
         title,
-        this.startedAt,
+        this.started_at,
         place,
         accepted ?: 0,
         limit ?: 0,
