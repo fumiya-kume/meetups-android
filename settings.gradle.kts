@@ -15,7 +15,8 @@ dataModuleList.forEach { moduleName ->
 val featureModuleList = listOf(
     ":overview",
     ":settingpage",
-    ":search"
+    ":search",
+    ":walkthrough"
 )
 featureModuleList.forEach { moduleName ->
     include(":feature${moduleName}")
