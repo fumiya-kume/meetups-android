@@ -8,8 +8,8 @@ internal fun Event.convert(): EventEntity =
         title,
         this.started_at,
         place,
-        accepted ?: 0,
-        limit ?: 0,
+        accepted,
+        limit,
         event_url
     )
 
