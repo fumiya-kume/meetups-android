@@ -23,7 +23,7 @@ android {
 
 
         buildConfigField("String", "firebaseApplicationId", System.getenv("firebase_application_id"))
-        buildConfigField("String", "firebaseAPIKKey", System.getenv("firebaase_api_key"))
+        buildConfigField("String", "firebaseAPIKKey", System.getenv("firebase_api_key"))
     }
     buildTypes {
         release {
