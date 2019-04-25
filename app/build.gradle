@@ -22,8 +22,8 @@ android {
 //        def firebaseAPIKey = properties.getProperty("firebase.api_key")
 
 
-        buildConfigField("String", "firebaseApplicationId", System.getenv("firebase_application_id"))
-        buildConfigField("String", "firebaseAPIKKey", System.getenv("firebase_api_key"))
+        buildConfigField("String", "firebaseApplicationId", "\"${System.getenv("firebase_application_id")}\"")
+        buildConfigField("String", "firebaseAPIKKey", "\"${System.getenv("firebase_api_key")}\"")
     }
     buildTypes {
         release {
