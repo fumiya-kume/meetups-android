@@ -7,10 +7,10 @@ jobs:
   build:
     filters:
       branches:
-        only: v2/master
+        only: master
     docker:
-    # specify the version you desire here
-    - image: circleci/android:api-28
+      # specify the version you desire here
+      - image: circleci/android:api-28
 
     # Specify service dependencies here if necessary
     # CircleCI maintains a library of pre-built images
@@ -25,27 +25,27 @@ jobs:
       TERM: dumb
 
     steps:
-    - checkout
+      - checkout
 
-    # Download and cache dependencies
-    - restore_cache:
-        keys:
-        - v1-dependencies-{{ checksum "build.gradle.kts" }}
-        # fallback to using the latest cache if no exact match is found
-        - v1-dependencies-
+      # Download and cache dependencies
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "build.gradle.kts" }}
+            # fallback to using the latest cache if no exact match is found
+            - v1-dependencies-
 
-    - run:
-        name: Install dependencies
-        command: ./gradlew dependencies
+      - run:
+          name: Install dependencies
+          command: ./gradlew dependencies
 
-    - run:
-        name: Gradle Build
-        command: ./gradlew assembledebug
+      - run:
+          name: Gradle Build
+          command: ./gradlew assembledebug
 
-    - save_cache:
-        paths:
-        - ~/.gradle
-        key: v1-dependencies-{{ checksum "build.gradle.kts" }}
+      - save_cache:
+          paths:
+            - ~/.gradle
+          key: v1-dependencies-{{ checksum "build.gradle.kts" }}
 
-    # run tests!
-    - run: ./gradlew test
+      # run tests!
+      - run: ./gradlew test
