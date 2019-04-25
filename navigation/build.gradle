@@ -9,7 +9,6 @@ android {
     compileSdkVersion 28
 
 
-
     defaultConfig {
         minSdkVersion 21
         targetSdkVersion 28
@@ -41,4 +40,7 @@ dependencies {
     implementation Dep.androidx.navigatiomCommonKtx
     implementation Dep.androidx.navigationFragmentKtx
     implementation Dep.androidx.navigationUiKtx
+
+    // JUnit
+    testImplementation Dep.test.junit
 }
