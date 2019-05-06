@@ -1,9 +1,7 @@
 package com.kuxu.base
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Transformations
 import org.junit.Assert
 import org.junit.Rule
 import org.junit.Test
@@ -80,22 +78,5 @@ class AwaitableObserberTest {
 
         Assert.assertEquals(data.last(), lastValue)
         Assert.assertEquals(data, awaitableObserber.valueLog)
-    }
-
-    @Theory
-    @Test(expected = TimeoutException::class)
-    fun 複数回の場合でも規定回数呼ばれない場合は失敗する(data: List<Int>) {
-        val liveData = MutableLiveData<Int>()
-
-        val awaitableObserber = AwaitableObserber<Int>(data.count())
-
-        liveData.observeForever(awaitableObserber)
-
-        val newData = data.toMutableList().apply { remove(0) }
-
-        newData.forEach { liveData.postValue(it) }
-
-        awaitableObserber.await()
-        val hoge: MediatorLiveData<String>
     }
 }
